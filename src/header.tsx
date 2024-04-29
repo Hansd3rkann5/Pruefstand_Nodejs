@@ -25,11 +25,11 @@ export function Header() {
     return <>
         <header>
             <a>
-                <img id="home" onClick={home} className={"button_header left " + (location.pathname==="/"?"home":"")} src="/static/house.svg" alt="" />
+                <img id="home" onClick={home} className={"button_header left " + (location.pathname==="/"?"home":"")} src="/assets/house.svg" alt="" />
             </a>
-            <img id="tq" className="img" src="/static/Logo.svg" alt="B" />
+            <img id="tq" className="img" src="/assets/Logo.svg" alt="B" />
             <a>
-                <img id="back" onClick={back} className={"button_header right " + (location.pathname==="/"?"home":"")} src="/static/back.svg" alt="" />
+                <img id="back" onClick={back} className={"button_header right " + (location.pathname==="/"?"home":"")} src="/assets/back.svg" alt="" />
             </a>
         </header>
         <Outlet/>

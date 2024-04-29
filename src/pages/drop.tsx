@@ -7,6 +7,7 @@ export function Drop() {
     const navigate = useNavigate();
     const { sendMessage } = useMyWebsocket();
 
+
     const onUpload:React.ChangeEventHandler<HTMLInputElement> = (data) => {  
         if ( data.target.files ) {
             console.log(data.target.files[0].text().then((text) => { 
@@ -20,7 +21,7 @@ export function Drop() {
             <div id="wrapper">
                 <form action="" method="get" id="fileDropBox">
                     <label htmlFor="input-file">
-                        <img id="upload" src="/static/upload.png" alt="" />
+                        <img id="upload" src="/assets/upload.png" alt="" />
                         <div id="file-upload">Drop or upload file here.</div>   
                         <input onChange={ onUpload } type="file" id="input-file"/>
                 </label>

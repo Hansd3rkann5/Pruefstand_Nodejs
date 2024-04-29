@@ -28,9 +28,9 @@ export function Manu() {
     }
 
     return <>
-        <div className="window manuell" onClick={()=> {console.log("window")}} id="window">
+        <div className="window manuell" id="window">
             <div>
-                <h2 >Bitte Wähle die jeweilige Komponente</h2>
+                <h2 id="bitte" >Bitte Wähle die jeweilige Komponente</h2>
             </div>
             <div className="wrapper">
                 <div className="selector_2">

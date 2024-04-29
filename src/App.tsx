@@ -7,6 +7,8 @@ import { Manu } from './pages/manu'
 import { Drop } from './pages/drop'
 import { Running } from './pages/running'
 import { Results } from './pages/results'
+import { Show_Konfig } from './pages/show_konfig'
+import { DeviceContextProvider } from './hooks/deviceContextProvider'
 
 const router = createBrowserRouter([{ "path": "/", "element": <Header />,
 children: [
@@ -16,13 +18,15 @@ children: [
   { "path": "/drop", "element": <Drop /> },
   { "path": "/running", "element": <Running /> },
   { "path": "/results", "element": <Results /> },
+  { "path": "/show_konfig", "element": <Show_Konfig /> },
 ] }])
 
 function App() {
 
   return (
-    <>
-      <RouterProvider router={router}></RouterProvider></>
+    <DeviceContextProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </DeviceContextProvider>
   )
 }
 
