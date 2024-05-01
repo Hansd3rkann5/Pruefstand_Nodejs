@@ -15,19 +15,23 @@ type ConfigBase<A> = {
     "Service Dongle": A
 }
 
-export interface DeviceContextType{
-    testnum:number
-    setTestnum:(v:number)=>void
-    testcombinations:Partial<SingleConfig>[]
-    setTestcombinations:(v:Partial<SingleConfig>[])=>void
-    checkifconfig:boolean
-    setCheckifconfig:(v:boolean)=>void
-    konfig?:Comp_Konfig
-    setKonfig:(v?:Comp_Konfig)=>void
-    checkdone:boolean
-    setCheckdone:(v:boolean)=>void
-    checkifauto:boolean
-    setCheckifauto:(v:boolean)=>void
-    odds:string[]
-    setOdds:(v:string[])=>void
+export interface DeviceContextType {
+    testnum: number
+    setTestnum: (v: number) => void
+    testcombinations: Partial<SingleConfig>[]
+    setTestcombinations: (v: Partial<SingleConfig>[]) => void
+    checkifmanu: boolean
+    setCheckifmanu: (v: boolean) => void
+    running: boolean
+    setRunning: (v: boolean) => void
+    checkifconfig: boolean
+    setCheckifconfig: (v: boolean) => void
+    konfig?: Comp_Konfig
+    setKonfig: (v?: Comp_Konfig) => void
+    checkdone: boolean
+    setCheckdone: (v: boolean) => void
+    checkifauto: boolean
+    setCheckifauto: (v: boolean) => void
+    odds: string[]
+    setOdds: (v: string[]) => void
 }

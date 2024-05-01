@@ -7,12 +7,12 @@ export function Konfig() {
     const { sendMessage } = useMyWebsocket();
 
     const auto = useCallback(() => {
-        sendMessage(JSON.stringify({ type: "auto"}))
+        sendMessage(JSON.stringify({ type: "auto" }))
         navigate("/drop")
-    }, [ navigate, sendMessage])
+    }, [navigate, sendMessage])
 
     function manuell() {
-        sendMessage(JSON.stringify({ type: "manuell" }))
+        sendMessage(JSON.stringify({ type: "manuell_konfig" }))
         navigate("/drop")
     }
 

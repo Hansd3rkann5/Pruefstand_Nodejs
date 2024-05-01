@@ -6,12 +6,12 @@ export function Home() {
     const { sendMessage } = useMyWebsocket();
 
     function konfig() {
-        sendMessage(JSON.stringify({ type: "konfig"}))
+        sendMessage(JSON.stringify({ type: "konfig" }))
         navigate("/konfig")
     }
 
     function manu() {
-        sendMessage(JSON.stringify({ type: "manu"}))
+        sendMessage(JSON.stringify({ type: "manuell_comp" }))
         navigate("/manu")
     }
 

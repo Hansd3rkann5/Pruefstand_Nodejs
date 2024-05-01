@@ -3,9 +3,15 @@ import { useMyWebsocket } from "../hooks/websocket";
 
 
 
-export const Show_Konfig:React.FC = () =>{
+export const Show_Konfig: React.FC = () => {
 
-    const { testcombinations }  = useMyWebsocket()
+    const { testcombinations } = useMyWebsocket()
 
-    return <ConfigCards configs={testcombinations}/>
+    return <>
+        <ConfigCards configs={testcombinations} />
+    </>
 }
+
+//Matthias Schoppe
+//Wolfgang Burger
+//Alexander Elbers

@@ -9,20 +9,13 @@ import 'react-circular-progressbar/dist/styles.css';
 export function Running() {
 
     const { progress, testnum, testcombinations, checkdone, checkifconfig, checkifauto, sendMessage } = useMyWebsocket();
-    const selections = { test: testnum }
+
     let r = false
-    
-    function MyPicker() {
-        const [pickerValue, setPickerValue] = useState({
-            test: testnum
-        })
-    }
 
     function next_test() {
         sendMessage(JSON.stringify({ type: "next", id: null }))
         r = true
     }
-
 
     return <>
         <div className="window manuell" id="window">
@@ -64,7 +57,7 @@ export function Running() {
                     backgroundColor: '#3e98ff',
                 })} />
             </div>
-            <div className={"start_wrapper " + (checkifauto ? "hidden" : " ")}>
+            <div className={"start_wrapper " + (checkifauto ? "" : "hidden ")}>
                 <button className={"start " + (checkdone ? "not_allow " : "allow ")} onClick={checkdone ? undefined : next_test} id="start">{r ? "weiter" : "Test starten"}</button>
             </div>
         </div>

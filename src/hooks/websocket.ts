@@ -12,12 +12,14 @@ export function useMyWebsocket() {
         "ws://" + "127.0.0.1:8000" + "/ws/",
         { share: true });
     const lastJM = socket.lastJsonMessage
-    const [ progress, setProgress ] = useState(0)
+    const [progress, setProgress] = useState(0)
     const {
         konfig, setKonfig,
         checkdone, setCheckdone,
         checkifconfig, setCheckifconfig,
         testnum, setTestnum,
+        running, setRunning,
+        checkifmanu, setCheckifmanu,
         testcombinations, setTestcombinations,
         odds, setOdds,
         checkifauto, setCheckifauto
@@ -27,9 +29,15 @@ export function useMyWebsocket() {
         if (lastJM) {
             if ("progress" in lastJM) {
                 setProgress(lastJM["progress"])
+                if (progress == 100) {
+                    setRunning(false)
+                }
             }
             if ("done" in lastJM) {
                 navigate("/results")
+                setCheckifmanu(false)
+                setCheckifauto(false)
+                setTestnum(0)
                 //setCheckifconfig(false)
             }
             if ("components_names" in lastJM) {
@@ -37,6 +45,7 @@ export function useMyWebsocket() {
             }
             if ("Upload erfolgreich" in lastJM) {
                 setCheckifconfig(true)
+                setRunning(false)
                 navigate("/show_konfig")
             }
             if ("combinations" in lastJM) {
@@ -44,6 +53,9 @@ export function useMyWebsocket() {
             }
             if ("testnum" in lastJM) {
                 setTestnum(lastJM["testnum"])
+            }
+            if ("manuell_comp" in lastJM) {
+                setCheckifmanu(true)
             }
             if ("auto" in lastJM) {
                 setCheckifauto(true)
@@ -56,24 +68,22 @@ export function useMyWebsocket() {
             }
         }
     }, [socket.lastMessage])
-    return { sendMessage: socket.sendMessage, progress: progress, konfig, testnum, testcombinations, checkdone, checkifconfig, checkifauto, odds }
+    return { sendMessage: socket.sendMessage, progress: progress, konfig, testnum, running, checkifmanu, testcombinations, checkdone, checkifconfig, checkifauto, odds }
 }
 
-function map_relays(combinations:(number|null)[][], konfig:Comp_Konfig): Partial<SingleConfig>[] {
+function map_relays(combinations: (number | null)[][], konfig: Comp_Konfig): Partial<SingleConfig>[] {
     console.log(combinations)
-    return combinations.map(combination=> {
+    return combinations.map(combination => {
         console.log(combination)
-        const conf:Partial<SingleConfig> = {
-            Motor:konfig.Motor.find(c=>c.relay===combination[0]),
-            Display:konfig.Display.find(c=>c.relay===combination[1]),
-            Battery:konfig.Battery.find(c=>c.relay===combination[2]),
-            Charger:konfig.Charger.find(c=>c.relay===combination[3]),
-            "Range EXT":konfig["Range EXT"].find(c=>c.relay===combination[4]),
-            "Service Dongle":konfig["Service Dongle"].find(c=>c.relay===combination[5])
+        const conf: Partial<SingleConfig> = {
+            Motor: konfig.Motor.find(c => c.relay === combination[0]),
+            Display: konfig.Display.find(c => c.relay === combination[1]),
+            Battery: konfig.Battery.find(c => c.relay === combination[2]),
+            Charger: konfig.Charger.find(c => c.relay === combination[3]),
+            "Range EXT": konfig["Range EXT"].find(c => c.relay === combination[4]),
+            "Service Dongle": konfig["Service Dongle"].find(c => c.relay === combination[5])
         }
         return conf
     })
 
 }
-//: SingleConfig[] 
-//:(number|null)[]
