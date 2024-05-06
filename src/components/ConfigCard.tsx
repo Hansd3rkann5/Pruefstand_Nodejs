@@ -20,11 +20,13 @@ export const ConfigCards: React.FC<{ configs: Partial<SingleConfig>[] }> = ({ co
 
 export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string }> = ({ config, name }) => {
 
-    const { testnum, progress, checkifmanu, checkifauto, testcombinations, sendMessage } = useMyWebsocket()
+    const { testnum, progress, checkifmanu, checkifauto, testcombinations, odds, sendMessage } = useMyWebsocket()
     const mycardRef = useRef<HTMLDivElement>(null)
     const mybuttonRef = useRef<HTMLDivElement>(null)
 
-    //myRef.current.style.scrollMargin = offset
+    useEffect(() => {
+        console.log(odds)
+    }, [odds])
 
     useEffect(() => {
         if (String(testnum) == name) {

@@ -9,17 +9,21 @@ import { Running } from './pages/running'
 import { Results } from './pages/results'
 import { Show_Konfig } from './pages/show_konfig'
 import { DeviceContextProvider } from './hooks/deviceContextProvider'
+import { Odds } from './pages/odds'
 
-const router = createBrowserRouter([{ "path": "/", "element": <Header />,
-children: [
-  { "path": "/", "element": <Home /> },
-  { "path": "/konfig", "element": <Konfig /> },
-  { "path": "/manu", "element": <Manu /> },
-  { "path": "/drop", "element": <Drop /> },
-  { "path": "/running", "element": <Running /> },
-  { "path": "/results", "element": <Results /> },
-  { "path": "/show_konfig", "element": <Show_Konfig /> },
-] }])
+const router = createBrowserRouter([{
+  "path": "/", "element": <Header />,
+  children: [
+    { "path": "/", "element": <Home /> },
+    { "path": "/konfig", "element": <Konfig /> },
+    { "path": "/manu", "element": <Manu /> },
+    { "path": "/drop", "element": <Drop /> },
+    { "path": "/running", "element": <Running /> },
+    { "path": "/results", "element": <Results /> },
+    { "path": "/show_konfig", "element": <Show_Konfig /> },
+    { "path": "/odds", "element": <Odds /> },
+  ]
+}])
 
 function App() {
 

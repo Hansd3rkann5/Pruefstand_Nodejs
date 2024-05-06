@@ -1,5 +1,3 @@
-import { useCallback, useState } from "react";
-import Picker from "react-mobile-picker";
 import { useMyWebsocket } from "../hooks/websocket";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';

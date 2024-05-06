@@ -64,7 +64,7 @@ export function useMyWebsocket() {
                 setCheckdone(false)
             }
             if ("odds" in lastJM) {
-                setOdds(lastJM["odds"])
+                setOdds([...odds, lastJM["odds"]])
             }
         }
     }, [socket.lastMessage])

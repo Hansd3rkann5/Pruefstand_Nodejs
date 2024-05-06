@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate, useNavigation } from "react-router"
+import { Outlet, useLocation, useNavigate } from "react-router"
 import { useMyWebsocket } from "./hooks/websocket";
 
 export function Header() {
