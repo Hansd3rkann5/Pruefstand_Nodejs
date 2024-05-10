@@ -4,6 +4,7 @@ type PruefstandKomponente = { name: string, relay: number }
 
 export type Comp_Konfig = ConfigBase<PruefstandKomponente[]>
 export type SingleConfig = ConfigBase<PruefstandKomponente>
+export type Combination = ConfigBase<number | null>
 
 
 type ConfigBase<A> = {
@@ -18,6 +19,8 @@ type ConfigBase<A> = {
 export interface DeviceContextType {
     testnum: number
     setTestnum: (v: number) => void
+    konfigquantity: number
+    setKonfigQuantity: (v: number) => void
     testcombinations: Partial<SingleConfig>[]
     setTestcombinations: (v: Partial<SingleConfig>[]) => void
     checkifmanu: boolean

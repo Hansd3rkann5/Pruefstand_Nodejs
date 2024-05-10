@@ -1,5 +1,5 @@
 import './App.css'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom'
 import { Home } from './pages/home'
 import { Header } from './header'
 import { Konfig } from './pages/konfig'
@@ -9,9 +9,9 @@ import { Running } from './pages/running'
 import { Results } from './pages/results'
 import { Show_Konfig } from './pages/show_konfig'
 import { DeviceContextProvider } from './hooks/deviceContextProvider'
-import { Odds } from './pages/odds'
+//import { Odds } from './pages/odds'
 
-const router = createBrowserRouter([{
+const router = createHashRouter([{
   "path": "/", "element": <Header />,
   children: [
     { "path": "/", "element": <Home /> },
@@ -21,7 +21,7 @@ const router = createBrowserRouter([{
     { "path": "/running", "element": <Running /> },
     { "path": "/results", "element": <Results /> },
     { "path": "/show_konfig", "element": <Show_Konfig /> },
-    { "path": "/odds", "element": <Odds /> },
+    //{ "path": "/odds", "element": <Odds /> },
   ]
 }])
 

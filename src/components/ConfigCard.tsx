@@ -13,16 +13,19 @@ function LinearProgressWithLabel(props: LinearProgressProps & { value: number })
 
 export const ConfigCards: React.FC<{ configs: Partial<SingleConfig>[] }> = ({ configs }) => {
 
-    return (<div className="window konfig">
+    const { konfigquantity, checkifmanu, checkifconfig } = useMyWebsocket()
+
+    return (<div className="window konfig" style={{ justifyContent: (konfigquantity == 1 && !checkifconfig || checkifmanu ? 'center' : '') }}>
         {configs.map((c, i) => <ConfigCard key={i} config={c} name={String(i + 1)} />)}
     </div>)
 }
 
 export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string }> = ({ config, name }) => {
 
-    const { testnum, progress, checkifmanu, checkifauto, testcombinations, odds, sendMessage } = useMyWebsocket()
+    const { testnum, progress, checkifmanu, checkifconfig, checkifauto, testcombinations, konfigquantity, odds, sendMessage } = useMyWebsocket()
     const mycardRef = useRef<HTMLDivElement>(null)
     const mybuttonRef = useRef<HTMLDivElement>(null)
+    console.log(checkifconfig, checkifmanu, checkifauto)
 
     useEffect(() => {
         console.log(odds)
@@ -45,8 +48,9 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
     }
 
     return <>
-        <div ref={mycardRef} className={"konfigframe" + (String(testnum) == name && checkifmanu == false ? " focus" : " nofocus") + (checkifmanu ? " single" : "")}>
-            <div className={"konfig component"}>Konfig {checkifmanu ? "" : name}</div>
+        <div ref={mycardRef}
+            className={"konfigframe" + (String(testnum) == name ? " focus" : " nofocus") + (konfigquantity == 1 && !checkifconfig ? " single" : "")}>
+            <div className={"konfig component"}>Konfig {konfigquantity == 1 && !checkifconfig ? "" : name}</div>
             <div className="compframe">
                 <div className="component">
                     <div className="component name">Motor:</div>
@@ -82,7 +86,7 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
                 <LinearProgressWithLabel value={String(testnum) != name ? 0 : progress} />
             </div>
         </div>
-        <div ref={mybuttonRef} className={(testcombinations.length == testnum ? "hidden" : String(testnum) == name && checkifauto == false ? "next" : "hidden")}>
+        <div ref={mybuttonRef} className={(testcombinations.length == testnum || checkifmanu ? "hidden" : String(testnum) == name && checkifauto == false ? "next" : "hidden")}>
             <button onClick={(progress != 100 ? undefined : next_test)} className={"button manuell" + (progress != 100 ? " not_allow" : " allow")}>{(">")} </button>
         </div>
     </>

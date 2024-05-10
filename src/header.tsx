@@ -1,12 +1,17 @@
 import { Outlet, useLocation, useNavigate } from "react-router"
-import { useMyWebsocket } from "./hooks/websocket";
+import { useWebSocket8000 } from "./hooks/websocket";
+import Logo from "../public/assets/Logo.svg?react"
+import House from "../public/assets/house.svg?react"
+import Back from "../public/assets/back.svg?react"
 
 export function Header() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { sendMessage } = useMyWebsocket();
+    const { sendMessage } = useWebSocket8000();
 
-    // sendMessage(JSON.stringify("Websocket Connection created"))
+    //sendMessage(JSON.stringify({ type: location.pathname }))
+    //console.log(location.pathname)
+    //sendMessage(JSON.stringify("Websocket Connection created"))
 
     function home() {
         navigate("/")
@@ -14,23 +19,14 @@ export function Header() {
     }
 
     function back() {
-        // if ( location.pathname === "" ) {
-        //     sendMessage(JSON.stringify({ type: "home"}))
-        // }
-        // else {}
         navigate(-1)
-        //console.log(navigate(-1))
     }
 
     return <>
         <header>
-            <a>
-                <img id="home" onClick={(location.pathname === "/" ? undefined : home)} className={"button_header left " + (location.pathname === "/" ? "home" : "")} src="/assets/house.svg" alt="" />
-            </a>
-            <img id="tq" className="img" src="/assets/Logo.svg" alt="B" />
-            <a>
-                <img id="back" onClick={(location.pathname === "/" || location.pathname === "/results" ? undefined : back)} className={"button_header right " + (location.pathname === "/" || location.pathname === "/results" ? "home" : "")} src="/assets/back.svg" alt="" />
-            </a>
+            <House id="home" onClick={(location.pathname !== "/" ? home : undefined)} className={"button_header left " + (location.pathname === "/" ? "home" : "")} />
+            <Logo id="tq" className="img" />
+            <Back id="back" onClick={(location.pathname === "/" || location.pathname === "/results" ? undefined : back)} className={"button_header right " + (location.pathname === "/" || location.pathname === "/results" ? "home" : "")} />
         </header>
         <Outlet />
     </>

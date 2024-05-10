@@ -7,6 +7,7 @@ import { DeviceContext } from "./deviceContext";
 export const DeviceContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     const [testnum, setTestnum] = useState(1);
+    const [konfigquantity, setKonfigQuantity] = useState(1);
     const [checkifmanu, setCheckifmanu] = useState(false)
     const [running, setRunning] = useState(false)
     const [testcombinations, setTestcombinations] = useState<Partial<SingleConfig>[]>([])
@@ -18,6 +19,7 @@ export const DeviceContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
     return (<DeviceContext.Provider value={{
         testnum, setTestnum,
+        konfigquantity, setKonfigQuantity,
         checkifmanu, setCheckifmanu,
         running, setRunning,
         testcombinations, setTestcombinations,

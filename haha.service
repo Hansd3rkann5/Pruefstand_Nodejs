@@ -1,0 +1,11 @@
+[Unit]
+Description=Hello World
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/bin/sh /home/simonbader/Coding/Pruefstand_Django/run_django.sh
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

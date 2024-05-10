@@ -5,12 +5,15 @@ import { useNavigate } from "react-router"
 import { useDeviceContext } from "./useDeviceContext";
 import { Comp_Konfig, SingleConfig } from "./types";
 
+export function useWebSocket8000() {
+    return useWebSocket<Record<string, any>>(
+        "ws://" + window.location.hostname + ":8000" + "/ws/",
+        { share: true });
+}
 
 export function useMyWebsocket() {
     const navigate = useNavigate();
-    const socket = useWebSocket<Record<string, any>>(
-        "ws://" + "127.0.0.1:8000" + "/ws/",
-        { share: true });
+    const socket = useWebSocket8000()
     const lastJM = socket.lastJsonMessage
     const [progress, setProgress] = useState(0)
     const {
@@ -18,12 +21,22 @@ export function useMyWebsocket() {
         checkdone, setCheckdone,
         checkifconfig, setCheckifconfig,
         testnum, setTestnum,
+        konfigquantity, setKonfigQuantity,
         running, setRunning,
         checkifmanu, setCheckifmanu,
         testcombinations, setTestcombinations,
         odds, setOdds,
         checkifauto, setCheckifauto
     } = useDeviceContext()
+
+    function reset() {
+        setKonfig(undefined)
+        setCheckifmanu(false)
+        setCheckifauto(false)
+        setCheckifconfig(false)
+        setTestnum(0)
+        setKonfigQuantity(1)
+    }
 
     useEffect(() => {
         if (lastJM) {
@@ -35,10 +48,10 @@ export function useMyWebsocket() {
             }
             if ("done" in lastJM) {
                 navigate("/results")
-                setCheckifmanu(false)
-                setCheckifauto(false)
-                setTestnum(0)
-                //setCheckifconfig(false)
+                reset()
+            }
+            if ("home" in lastJM) {
+                reset()
             }
             if ("components_names" in lastJM) {
                 setKonfig(lastJM["components_names"])
@@ -56,8 +69,10 @@ export function useMyWebsocket() {
             }
             if ("manuell_comp" in lastJM) {
                 setCheckifmanu(true)
+                setCheckifauto(false)
             }
             if ("auto" in lastJM) {
+                setCheckifmanu(false)
                 setCheckifauto(true)
             }
             if ("done" in lastJM) {
@@ -68,7 +83,7 @@ export function useMyWebsocket() {
             }
         }
     }, [socket.lastMessage])
-    return { sendMessage: socket.sendMessage, progress: progress, konfig, testnum, running, checkifmanu, testcombinations, checkdone, checkifconfig, checkifauto, odds }
+    return { sendMessage: socket.sendMessage, progress, konfig, testnum, konfigquantity, setKonfigQuantity, running, checkifmanu, testcombinations, checkdone, checkifconfig, checkifauto, odds }
 }
 
 function map_relays(combinations: (number | null)[][], konfig: Comp_Konfig): Partial<SingleConfig>[] {

@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 
 interface MultiSelectPopProps {
-    required?:boolean
+    required?: boolean
     type: string
     names?: string[]
     // num: number | null
@@ -9,19 +9,20 @@ interface MultiSelectPopProps {
     onClick: (id: number | null, type: string) => void
 }
 
-export function MultiSelectPopup({ required=true, onClick, type, names, active }: MultiSelectPopProps) {
+export function MultiSelectPopup({ required = true, onClick, type, names, active }: MultiSelectPopProps) {
     const [open, setOpen] = useState(false)
     const _onClick = useCallback((id: number | null) => {
         setOpen(false)
         onClick(id, type)
     }, [onClick, type])
+    console.log(open)
     return (<>
-        <button className={"selector_small color " + (open ? "" : "hover ") + (active !== undefined ? "checked" : "")} onClick={() => { setOpen(!open) }}>{active===null?`no ${type}`:`${type} ${active===undefined?"":names?.[active] ?? ""}`}</button>
+        <button className={"selector_small color " + (open ? "" : "hover ") + (active !== undefined ? "checked" : "")} onClick={() => { setOpen(!open) }}>{active === null ? `no ${type}` : `${type} ${active === undefined ? "" : names?.[active] ?? ""}`}</button>
         <div className={"comp_selector " + (open ? "" : "hidden")} id="comp_selector">
-            { !required && <CustomButton type={type} name={""} onClick={_onClick} id={null} active={active} />}
+            {!required && <CustomButton type={type} name={""} onClick={_onClick} id={null} active={active} />}
             {names?.map((name, i) => (
                 <CustomButton type={type} name={name} onClick={_onClick} id={i} key={i} active={active} />
-            ))} 
+            ))}
         </div>
     </>)
 }
@@ -40,7 +41,7 @@ const CustomButton: React.FC<ButtonProps> = ({
     onClick,
     active,
     type = 'Motor',
-    }) => {
+}) => {
     const click = useCallback(() => {
         onClick(id);
     }, [id, onClick]);
@@ -48,6 +49,6 @@ const CustomButton: React.FC<ButtonProps> = ({
         <button
             onClick={click}
             className={"selector_small manu hover " + (id === active ? "checked" : "")}
-        >{id===null?`no ${type}`:`${name}`}</button>
+        >{id === null ? `no ${type}` : `${name}`}</button>
     );
 }
