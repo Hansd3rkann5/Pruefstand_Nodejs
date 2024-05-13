@@ -58,8 +58,8 @@ export function Manu() {
     return <>
         <div className="window picker">
             <div style={{ display: "flex", flexDirection: 'column', justifyContent: 'center' }}>
-                <h2 style={{ position: 'absolute', top: '0', marginLeft: '30px', marginTop: '27px' }}>Anzahl<br />Konfigs</h2>
-                <Slider style={{ marginTop: '12px', marginLeft: '46px', height: '39%', position: 'absolute', zIndex: 1, transform: 'scale(1.6)' }}
+                <h2 style={{ position: 'absolute', top: '0', marginLeft: '2.6vw', marginTop: '27px' }}>Anzahl<br />Konfigs</h2>
+                <Slider style={{ marginTop: '12px', marginLeft: '3.9vw', marginBottom: '3vh', height: '39%', position: 'absolute', zIndex: 1, transform: 'scale(1.6)' }}
                     orientation="vertical"
                     aria-label="Custom marks"
                     value={konfigquantity}
@@ -70,13 +70,14 @@ export function Manu() {
                     min={combinations.length <= 1 ? 0 : 1}
                     max={Math.max(combinations.length, 1)}
                     onChange={handleChange}
+                    track={false}
                 //disabled={(combinations.length <= 1 ? true : false)}
                 />
             </div>
             <div className="window manuell" id="window">
-                {/* <div>
-                </div> */}
-                <h2 >Bitte Wähle die jeweilige Komponente</h2>
+                <div>
+                    <h2 >Bitte Wähle die jeweilige Komponente</h2>
+                </div>
                 <div className="wrapper">
                     <div className="selector_2">
                         <MultiSelectPopup type="Motor" active={current_comb.Motor} names={konfig?.Motor.map(m => m.name)} onClick={(id, type) => { set_combination(id, type) }} />
@@ -97,7 +98,7 @@ export function Manu() {
                         onClick={() => (all_checked ? set_combinations() : undefined)}>Test starten</button>
                     <button
                         className={"start " + (current_checked ? "allow " : "not_allow ")} id="next"
-                        onClick={() => (current_checked ? setKonfigQuantity(konfigquantity + 1) : undefined)}>nächste Konfiguration</button>
+                        onClick={() => (current_checked ? setKonfigQuantity(konfigquantity + 1) : undefined)}>Nächste Konfiguration</button>
                 </div>
             </div>
         </div>
