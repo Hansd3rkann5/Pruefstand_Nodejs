@@ -5,8 +5,8 @@ import { useMyWebsocket } from "../hooks/websocket";
 
 export const Show_Konfig: React.FC = () => {
 
-    const { testcombinations } = useMyWebsocket()
-
+    const { testcombinations, running } = useMyWebsocket()
+    console.log(running)
     return <>
         <ConfigCards configs={testcombinations} />
     </>

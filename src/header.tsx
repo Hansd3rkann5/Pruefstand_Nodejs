@@ -1,5 +1,5 @@
 import { Outlet, useLocation, useNavigate } from "react-router"
-import { useWebSocket8000 } from "./hooks/websocket";
+import { useMyWebsocket } from "./hooks/websocket";
 import Logo from "../public/assets/Logo.svg?react"
 import House from "../public/assets/house.svg?react"
 import Back from "../public/assets/back.svg?react"
@@ -7,16 +7,14 @@ import Back from "../public/assets/back.svg?react"
 export function Header() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { sendMessage } = useWebSocket8000();
+    const { running, sendMessage } = useMyWebsocket();
 
-    //sendMessage(JSON.stringify({ type: location.pathname }))
-    //console.log(location.pathname)
-    //sendMessage(JSON.stringify("Websocket Connection created"))
 
     function home() {
         navigate("/")
         sendMessage(JSON.stringify({ type: "home" }))
     }
+    console.log(running)
 
     function back() {
         navigate(-1)
@@ -24,9 +22,11 @@ export function Header() {
 
     return <>
         <header>
-            <House id="home" onClick={(location.pathname !== "/" ? home : undefined)} className={"button_header left " + (location.pathname === "/" ? "home" : "")} />
+            <House id="home" onClick={(location.pathname === "/" || running === true ? undefined : home)}
+                className={"button_header left " + (location.pathname === "/" || running === true ? "home" : "")} />
             <Logo id="tq" className="img" />
-            <Back id="back" onClick={(location.pathname === "/" || location.pathname === "/results" ? undefined : back)} className={"button_header right " + (location.pathname === "/" || location.pathname === "/results" ? "home" : "")} />
+            <Back id="back" onClick={(location.pathname === "/" || location.pathname === "/results" || running === true ? undefined : back)}
+                className={"button_header right " + (location.pathname === "/" || location.pathname === "/results" || running === true ? "home" : "")} />
         </header>
         <Outlet />
     </>

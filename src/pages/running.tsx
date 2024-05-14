@@ -18,17 +18,6 @@ export function Running() {
     return <>
         <div className="window manuell" id="window">
             <div className={(checkifconfig ? "" : "hidden")} id="test_num" >
-                {/* <Picker value={{'Test' pickerValue}}>
-                    {Object.keys(selections).map(name => (
-                        <Picker.Column key={name} name={name}>
-                            {selections[name].map(option => (
-                                <Picker.Item key={option} value={option}>
-                                    {option}
-                                </Picker.Item>
-                            ))}
-                        </Picker.Column>
-                    ))}
-                </Picker> */}
                 <h2 id="test" >Test {testnum} von {testcombinations.length}</h2>
             </div>
             <div className="wrapper">

@@ -15,7 +15,6 @@ export function MultiSelectPopup({ required = true, onClick, type, names, active
         setOpen(false)
         onClick(id, type)
     }, [onClick, type])
-    console.log(open)
     return (<>
         <button className={"selector_small color " + (open ? "" : "hover ") + (active !== undefined ? "checked" : "")} onClick={() => { setOpen(!open) }}>{active === null ? `no ${type}` : `${type} ${active === undefined ? "" : names?.[active] ?? ""}`}</button>
         <div className={"comp_selector " + (open ? "" : "hidden")} id="comp_selector">

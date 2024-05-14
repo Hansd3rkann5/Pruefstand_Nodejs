@@ -25,7 +25,6 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
     const { testnum, progress, checkifmanu, checkifconfig, checkifauto, testcombinations, konfigquantity, odds, sendMessage } = useMyWebsocket()
     const mycardRef = useRef<HTMLDivElement>(null)
     const mybuttonRef = useRef<HTMLDivElement>(null)
-    console.log(checkifconfig, checkifmanu, checkifauto)
 
     useEffect(() => {
         console.log(odds)

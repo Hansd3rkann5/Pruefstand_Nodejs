@@ -31,11 +31,12 @@ export function useMyWebsocket() {
 
     function reset() {
         setKonfig(undefined)
-        setCheckifmanu(false)
+        // setCheckifmanu(false)
         setCheckifauto(false)
         setCheckifconfig(false)
         setTestnum(0)
         setKonfigQuantity(1)
+        setRunning(false)
     }
 
     useEffect(() => {
@@ -47,6 +48,8 @@ export function useMyWebsocket() {
                 }
             }
             if ("done" in lastJM) {
+                setCheckdone(false)
+                setRunning(false)
                 navigate("/results")
                 reset()
             }
@@ -58,11 +61,12 @@ export function useMyWebsocket() {
             }
             if ("Upload erfolgreich" in lastJM) {
                 setCheckifconfig(true)
-                setRunning(false)
+                setRunning(true)
                 navigate("/show_konfig")
             }
             if ("combinations" in lastJM) {
                 if (konfig) setTestcombinations(map_relays(lastJM["combinations"], konfig))
+                setRunning(true)
             }
             if ("testnum" in lastJM) {
                 setTestnum(lastJM["testnum"])
@@ -75,9 +79,6 @@ export function useMyWebsocket() {
                 setCheckifmanu(false)
                 setCheckifauto(true)
             }
-            if ("done" in lastJM) {
-                setCheckdone(false)
-            }
             if ("odds" in lastJM) {
                 setOdds([...odds, lastJM["odds"]])
             }
@@ -87,9 +88,7 @@ export function useMyWebsocket() {
 }
 
 function map_relays(combinations: (number | null)[][], konfig: Comp_Konfig): Partial<SingleConfig>[] {
-    console.log(combinations)
     return combinations.map(combination => {
-        console.log(combination)
         const conf: Partial<SingleConfig> = {
             Motor: konfig.Motor.find(c => c.relay === combination[0]),
             Display: konfig.Display.find(c => c.relay === combination[1]),

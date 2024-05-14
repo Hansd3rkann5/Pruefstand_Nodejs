@@ -6,13 +6,6 @@ import { useNavigate } from "react-router"
 import { Combination, SingleConfig } from "../hooks/types";
 
 
-const marks = [
-    { value: 1, label: 1 },
-    { value: 2, label: 2 },
-    { value: 3, label: 3 },
-    { value: 4, label: 4 },
-    { value: 5, label: 5 },
-];
 
 function is_all_checked(current_comb: Partial<Combination>) {
     return current_comb.Motor !== undefined && current_comb.Display !== undefined && current_comb.Battery !== undefined && current_comb.Charger !== undefined && current_comb["Range EXT"] !== undefined && current_comb["Service Dongle"] !== undefined
@@ -27,11 +20,6 @@ export function Manu() {
     const current_comb = combinations[konfigquantity - 1] ?? {}
     const current_checked = is_all_checked(current_comb)
     const all_checked = combinations.length > 0 && combinations.every(c => is_all_checked(c))
-    console.log(combinations)
-
-    useEffect(() => {
-        console.log(konfigquantity)
-    }, [konfigquantity])
 
     function send(id: number | null, type: string) {
         sendMessage(JSON.stringify({ type: type, id: id == null ? null : id }))
@@ -51,7 +39,6 @@ export function Manu() {
         }
         _combinations[konfigquantity - 1][type as "Display"] = id
         setCombinations(_combinations)
-        console.log(combinations)
     }
 
 
@@ -59,7 +46,7 @@ export function Manu() {
         <div className="window picker">
             <div style={{ display: "flex", flexDirection: 'column', justifyContent: 'center' }}>
                 <h2 style={{ position: 'absolute', top: '0', marginLeft: '2.6vw', marginTop: '27px' }}>Anzahl<br />Konfigs</h2>
-                <Slider style={{ marginTop: '12px', marginLeft: '3.9vw', marginBottom: '3vh', height: '39%', position: 'absolute', zIndex: 1, transform: 'scale(1.6)' }}
+                <Slider style={{ marginTop: '12px', marginLeft: '4.4vw', marginBottom: '3vh', height: '39%', position: 'absolute', zIndex: 1, transform: 'scale(1.6)' }}
                     orientation="vertical"
                     aria-label="Custom marks"
                     value={konfigquantity}
@@ -71,6 +58,7 @@ export function Manu() {
                     max={Math.max(combinations.length, 1)}
                     onChange={handleChange}
                     track={false}
+                    disabled={combinations.length <= 1 ? true : false}
                 //disabled={(combinations.length <= 1 ? true : false)}
                 />
             </div>
@@ -94,9 +82,11 @@ export function Manu() {
                 </div>
                 <div className="start_wrapper">
                     <button
+                        style={{ marginLeft: '3vw' }}
                         className={"start " + (all_checked ? "allow " : "not_allow ")} id="start"
                         onClick={() => (all_checked ? set_combinations() : undefined)}>Test starten</button>
                     <button
+                        style={{ marginRight: '3vw' }}
                         className={"start " + (current_checked ? "allow " : "not_allow ")} id="next"
                         onClick={() => (current_checked ? setKonfigQuantity(konfigquantity + 1) : undefined)}>Nächste Konfiguration</button>
                 </div>
