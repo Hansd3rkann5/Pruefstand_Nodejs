@@ -20,7 +20,6 @@ export function Manu() {
     const current_comb = combinations[konfigquantity - 1] ?? {}
     const current_checked = is_all_checked(current_comb)
     const all_checked = combinations.length > 0 && combinations.every(c => is_all_checked(c))
-    const str = "Ladegerät/\nService Dongle"
 
     function set_combinations() {
         if (all_checked) {

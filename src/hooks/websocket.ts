@@ -99,5 +99,4 @@ function map_relays(combinations: (number | null)[][], konfig: Comp_Konfig): Par
         }
         return conf
     })
-
 }
