@@ -18,11 +18,11 @@ export function Home() {
     return <>
         <div className="window" id="window">
             <div id="konfig">
-                <div onClick={konfig} className="button">Test<br />über<br />Konfig-File</div>
+                <div onClick={konfig} className="button"><span>Test<br />über<br />Konfig-File</span></div>
             </div>
             <hr id="sep" />
             <div id="manuell">
-                <div onClick={manu} className="button">Manuelle<br />Komponenten<br />Auswahl</div>
+                <div onClick={manu} className="button"><span>Manuelle<br />Komponenten<br />Auswahl</span></div>
             </div>
         </div>
     </>

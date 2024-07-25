@@ -14,7 +14,6 @@ export function Header() {
         navigate("/")
         sendMessage(JSON.stringify({ type: "home" }))
     }
-    console.log(running)
 
     function back() {
         navigate(-1)
@@ -22,11 +21,11 @@ export function Header() {
 
     return <>
         <header>
-            <House id="home" onClick={(location.pathname === "/" || running === true ? undefined : home)}
-                className={"button_header left " + (location.pathname === "/" || running === true ? "home" : "")} />
+            <House id="home" onClick={(location.pathname === "/" || location.pathname === "/show_konfig" ? undefined : home)}
+                className={"button_header left " + (location.pathname === "/" || location.pathname === "/show_konfig" ? "home" : "")} />
             <Logo id="tq" className="img" />
-            <Back id="back" onClick={(location.pathname === "/" || location.pathname === "/results" || running === true ? undefined : back)}
-                className={"button_header right " + (location.pathname === "/" || location.pathname === "/results" || running === true ? "home" : "")} />
+            <Back id="back" onClick={(location.pathname === "/" || location.pathname === "/results" || location.pathname === "/show_konfig" ? undefined : back)}
+                className={"button_header right " + (location.pathname === "/" || location.pathname === "/results" || location.pathname === "/show_konfig" ? "home" : "")} />
         </header>
         <Outlet />
     </>

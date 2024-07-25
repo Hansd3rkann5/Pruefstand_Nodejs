@@ -16,7 +16,7 @@ export function MultiSelectPopup({ required = true, onClick, type, names, active
         onClick(id, type)
     }, [onClick, type])
     return (<>
-        <button className={"selector_small color " + (open ? "" : "hover ") + (active !== undefined ? "checked" : "")} onClick={() => { setOpen(!open) }}>{active === null ? `no ${type}` : `${type} ${active === undefined ? "" : names?.[active] ?? ""}`}</button>
+        <button className={"selector_small color " + (open ? "" : "hover ") + (active !== undefined ? "checked" : "")} onClick={() => { setOpen(!open) }}>{active === null ? `no ${type}` : type === "Ladegerät/Service Dongle" ? "Ladegeräte \nService Dongle" : `${type} ${active === undefined ? "" : names?.[active] ?? ""}`}</button>
         <div className={"comp_selector " + (open ? "" : "hidden")} id="comp_selector">
             {!required && <CustomButton type={type} name={""} onClick={_onClick} id={null} active={active} />}
             {names?.map((name, i) => (
@@ -44,6 +44,7 @@ const CustomButton: React.FC<ButtonProps> = ({
     const click = useCallback(() => {
         onClick(id);
     }, [id, onClick]);
+    console.log(name, id)
     return (
         <button
             onClick={click}

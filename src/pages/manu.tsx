@@ -8,7 +8,7 @@ import { Combination, SingleConfig } from "../hooks/types";
 
 
 function is_all_checked(current_comb: Partial<Combination>) {
-    return current_comb.Motor !== undefined && current_comb.Display !== undefined && current_comb.Battery !== undefined && current_comb.Charger !== undefined && current_comb["Range EXT"] !== undefined && current_comb["Service Dongle"] !== undefined
+    return current_comb.Motor !== undefined && current_comb.Display !== undefined && current_comb.Battery !== undefined && current_comb.Smartbox !== undefined && current_comb["Range EXT"] !== undefined && current_comb["Ladegerät/Service Dongle"] !== undefined
 }
 
 export function Manu() {
@@ -20,10 +20,7 @@ export function Manu() {
     const current_comb = combinations[konfigquantity - 1] ?? {}
     const current_checked = is_all_checked(current_comb)
     const all_checked = combinations.length > 0 && combinations.every(c => is_all_checked(c))
-
-    function send(id: number | null, type: string) {
-        sendMessage(JSON.stringify({ type: type, id: id == null ? null : id }))
-    }
+    const str = "Ladegerät/\nService Dongle"
 
     function set_combinations() {
         if (all_checked) {
@@ -40,7 +37,6 @@ export function Manu() {
         _combinations[konfigquantity - 1][type as "Display"] = id
         setCombinations(_combinations)
     }
-
 
     return <>
         <div className="window picker">
@@ -59,7 +55,6 @@ export function Manu() {
                     onChange={handleChange}
                     track={false}
                     disabled={combinations.length <= 1 ? true : false}
-                //disabled={(combinations.length <= 1 ? true : false)}
                 />
             </div>
             <div className="window manuell" id="window">
@@ -73,11 +68,11 @@ export function Manu() {
                     </div>
                     <div className="selector_2">
                         <MultiSelectPopup type="Battery" active={current_comb.Battery} names={konfig?.Battery.map(m => m.name)} onClick={(id, type) => { set_combination(id, type) }} />
-                        <MultiSelectPopup required={false} type="Charger" active={current_comb.Charger} names={konfig?.Charger.map(m => m.name)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopup required={false} type="Smartbox" active={current_comb.Smartbox} names={konfig?.Smartbox.map(m => m.name)} onClick={(id, type) => { set_combination(id, type) }} />
                     </div>
                     <div className="selector_2">
                         <MultiSelectPopup required={false} type="Range EXT" active={current_comb["Range EXT"]} names={konfig?.["Range EXT"].map(m => m.name)} onClick={(id, type) => { set_combination(id, type) }} />
-                        <MultiSelectPopup required={false} type="Service Dongle" active={current_comb["Service Dongle"]} names={konfig?.["Service Dongle"].map(m => m.name)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopup required={false} type="Ladegerät/Service Dongle" active={current_comb["Ladegerät/Service Dongle"]} names={konfig?.["Ladegerät/Service Dongle"].map(m => m.name)} onClick={(id, type) => { set_combination(id, type) }} />
                     </div>
                 </div>
                 <div className="start_wrapper">

@@ -43,12 +43,12 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
 
     function next_test() {
         sendMessage(JSON.stringify({ type: "next", id: null }))
-        console.log("next")
     }
 
     return <>
         <div ref={mycardRef}
-            className={"konfigframe" + (String(testnum) == name ? " focus" : " nofocus") + (konfigquantity == 1 && !checkifconfig ? " single" : "")}>
+            className={"konfigframe" + (String(testnum) == name ? " focus" : " nofocus") + (konfigquantity == 1 && !checkifconfig ? " single" : "")}
+            style={(name == '1' && String(testnum) == '1' ? { marginLeft: '7vw' } : {}) || (name == '1' ? { marginLeft: '1vw' } : {})}>
             <div className={"konfig component"}>Konfig {konfigquantity == 1 && !checkifconfig ? "" : name}</div>
             <div className="compframe">
                 <div className="component">
@@ -67,8 +67,8 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
                 </div>
                 <hr />
                 <div className="component">
-                    <div className="component name">Charger:</div>
-                    <div className="component choice">{config.Charger?.name ?? "-"}</div>
+                    <div className="component name">Smartbox:</div>
+                    <div className="component choice">{config.Smartbox?.name ?? "-"}</div>
                 </div>
                 <hr />
                 <div className="component">
@@ -77,15 +77,15 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
                 </div>
                 <hr />
                 <div className="component">
-                    <div className="component name">Service Dongle:</div>
-                    <div className="component choice">{config["Service Dongle"]?.name ?? "-"}</div>
+                    <div className="component name">Ladegerät/Service Dongle:</div>
+                    <div className="component choice">{(config["Ladegerät/Service Dongle"])?.name ?? "-"}</div>
                 </div>
             </div>
             <div style={{ width: "100%" }} className={(String(testnum) == name ? "" : "hidden")}>
-                <LinearProgressWithLabel value={String(testnum) != name ? 0 : progress} />
+                <LinearProgressWithLabel className={(name < String(testnum) ? "done" : "")} value={String(testnum) == name ? progress : testnum <= Number(name) ? 0 : 100} />
             </div>
         </div>
-        <div ref={mybuttonRef} className={(testcombinations.length == testnum || checkifmanu ? "hidden" : String(testnum) == name && checkifauto == false ? "next" : "hidden")}>
+        <div ref={mybuttonRef} className={(testcombinations.length == testnum || checkifmanu ? "hidden hide" : String(testnum) == name && checkifauto == false ? "next" : "hidden hide")}>
             <button onClick={(progress != 100 ? undefined : next_test)} className={"button manuell" + (progress != 100 ? " not_allow" : " allow")}>{(">")} </button>
         </div>
     </>

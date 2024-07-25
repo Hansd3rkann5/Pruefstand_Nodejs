@@ -19,11 +19,11 @@ export function Konfig() {
     return <>
         <div className="window" id="window">
             <div id="konfig">
-                <div onClick={auto} className="button" id="auto_test">Automatisierter<br />Test</div>
+                <div onClick={auto} className="button" id="auto_test"><span>Automatisierter<br />Test</span></div>
             </div>
             <hr id="sep" />
             <div id="manuell">
-                <div onClick={manuell} className="button">Manuelles<br />durchlaufen<br />der Kombinatoriken</div>
+                <div onClick={manuell} className="button"><span>Manuelles<br />durchlaufen<br />der Kombinatoriken</span></div>
             </div>
         </div>
     </>

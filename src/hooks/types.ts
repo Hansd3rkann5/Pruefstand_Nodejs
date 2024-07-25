@@ -11,9 +11,9 @@ type ConfigBase<A> = {
     Motor: A
     Display: A
     Battery: A
-    Charger: A
+    Smartbox: A
     "Range EXT": A
-    "Service Dongle": A
+    "Ladegerät/Service Dongle": A
 }
 
 export interface DeviceContextType {

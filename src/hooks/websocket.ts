@@ -93,9 +93,9 @@ function map_relays(combinations: (number | null)[][], konfig: Comp_Konfig): Par
             Motor: konfig.Motor.find(c => c.relay === combination[0]),
             Display: konfig.Display.find(c => c.relay === combination[1]),
             Battery: konfig.Battery.find(c => c.relay === combination[2]),
-            Charger: konfig.Charger.find(c => c.relay === combination[3]),
+            Smartbox: konfig.Smartbox.find(c => c.relay === combination[3]),
             "Range EXT": konfig["Range EXT"].find(c => c.relay === combination[4]),
-            "Service Dongle": konfig["Service Dongle"].find(c => c.relay === combination[5])
+            "Ladegerät/Service Dongle": konfig["Ladegerät/Service Dongle"].find(c => c.relay === combination[5]),
         }
         return conf
     })
