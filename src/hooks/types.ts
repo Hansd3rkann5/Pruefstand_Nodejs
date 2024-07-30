@@ -1,6 +1,6 @@
 
 
-type PruefstandKomponente = { name: string, serial: string, relay: number }
+type PruefstandKomponente = { name: string | null, serial: string | null, relay: number }
 
 export type Comp_Konfig = ConfigBase<PruefstandKomponente[]>
 export type SingleConfig = ConfigBase<PruefstandKomponente>

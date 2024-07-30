@@ -7,7 +7,7 @@ export function Home() {
 
     function konfig() {
         sendMessage(JSON.stringify({ type: "konfig" }))
-        navigate("/konfig")
+        navigate("/drop")
     }
 
     function manu() {

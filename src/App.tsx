@@ -14,8 +14,10 @@ import { DeviceContextProvider } from './hooks/deviceContextProvider'
 const router = createHashRouter([{
   "path": "/", "element": <Header />,
   children: [
-    { "path": "/", "element": <Home /> },
-    { "path": "/konfig", "element": <Konfig /> },
+    //{ "path": "/", "element": <Home /> },
+    { "path": "/", "element": <Konfig /> },
+    //{ "path": "/konfig", "element": <Konfig /> },
+    { "path": "/home", "element": <Home /> },
     { "path": "/manu", "element": <Manu /> },
     { "path": "/drop", "element": <Drop /> },
     { "path": "/running", "element": <Running /> },

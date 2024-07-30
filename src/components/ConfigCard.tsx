@@ -68,17 +68,17 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
                 <hr />
                 <div className="component">
                     <div className="component name">Smartbox:</div>
-                    <div className="component choice">{config.Smartbox?.name ?? "-"}</div>
+                    <div className="component choice">{config.Smartbox?.serial ?? "-"}</div>
                 </div>
                 <hr />
                 <div className="component">
                     <div className="component name">Range Ext:</div>
-                    <div className="component choice">{config["Range EXT"]?.name ?? "-"}</div>
+                    <div className="component choice">{config["Range EXT"]?.serial ?? "-"}</div>
                 </div>
                 <hr />
                 <div className="component">
-                    <div className="component name">Ladegerät/Service Dongle:</div>
-                    <div className="component choice">{(config["Ladegerät/Service Dongle"])?.name ?? "-"}</div>
+                    <div className="component name">{(config["Ladegerät/Service Dongle"])?.name ?? "Ladegerät / SD"}</div>
+                    <div className="component choice">{(config["Ladegerät/Service Dongle"]?.name === "Ladegerät" ? config["Ladegerät/Service Dongle"]?.serial : "")}</div>
                 </div>
             </div>
             <div style={{ width: "100%" }} className={(String(testnum) == name ? "" : "hidden")}>

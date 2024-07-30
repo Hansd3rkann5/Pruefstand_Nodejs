@@ -281,15 +281,21 @@ h2 {
   border: 1px solid #00a6e5;
   color: #ffffff;
   background-color: #06263b;
-  font-size: clamp(16px, 6vw, 40px);
+  font-size: clamp(16px, 3vw, 36px);
   text-align: center;
   transition: all 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   cursor: default;
   border-radius: 1.5rem 1.5rem 0 1.5rem;
   white-space: pre-line;
+}
+
+.small_serial {
+  font-size: 25px;
+  height: 2vh;
 }
 
 .color {
@@ -401,6 +407,12 @@ span {
   opacity: 0.4;
 }
 
+.gear {
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+}
+
 #drop_zone {
   border: 5px solid blue;
   width: 50%;
@@ -482,7 +494,7 @@ span {
   display: flex;
   align-items: center;
   align-content: stretch;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   z-index: 1;
   border-radius: 3vw 3vw 0 3vw;
   inset: 0;

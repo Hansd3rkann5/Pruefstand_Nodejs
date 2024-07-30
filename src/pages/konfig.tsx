@@ -8,12 +8,12 @@ export function Konfig() {
 
     const auto = useCallback(() => {
         sendMessage(JSON.stringify({ type: "auto" }))
-        navigate("/drop")
+        navigate("/home")
     }, [navigate, sendMessage])
 
     function manuell() {
         sendMessage(JSON.stringify({ type: "manuell_konfig" }))
-        navigate("/drop")
+        navigate("/home")
     }
 
     return <>
