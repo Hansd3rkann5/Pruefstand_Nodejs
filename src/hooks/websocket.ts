@@ -26,7 +26,7 @@ export function useMyWebsocket() {
         checkifmanu, setCheckifmanu,
         testcombinations, setTestcombinations,
         odds, setOdds,
-        checkifauto, setCheckifauto
+        checkifauto, setCheckifauto,
     } = useDeviceContext()
 
     function reset() {
@@ -66,6 +66,7 @@ export function useMyWebsocket() {
             }
             if ("combinations" in lastJM) {
                 if (konfig) setTestcombinations(map_relays(lastJM["combinations"], konfig))
+                console.log(testcombinations.length)
                 setRunning(true)
             }
             if ("testnum" in lastJM) {

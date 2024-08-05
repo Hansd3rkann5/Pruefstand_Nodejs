@@ -9,6 +9,7 @@ export const DeviceContextProvider: React.FC<{ children: React.ReactNode }> = ({
     const [testnum, setTestnum] = useState(1);
     const [konfigquantity, setKonfigQuantity] = useState(1);
     const [checkifmanu, setCheckifmanu] = useState(false)
+    const [popup, setPopup] = useState(false)
     const [running, setRunning] = useState(false)
     const [testcombinations, setTestcombinations] = useState<Partial<SingleConfig>[]>([])
     const [checkdone, setCheckdone] = useState(false)
@@ -21,6 +22,7 @@ export const DeviceContextProvider: React.FC<{ children: React.ReactNode }> = ({
         testnum, setTestnum,
         konfigquantity, setKonfigQuantity,
         checkifmanu, setCheckifmanu,
+        popup, setPopup,
         running, setRunning,
         testcombinations, setTestcombinations,
         checkdone, setCheckdone,

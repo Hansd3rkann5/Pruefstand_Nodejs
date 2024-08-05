@@ -114,6 +114,10 @@ h2 {
   overflow-y: hidden;
 }
 
+.window.download {
+  overflow: hidden;
+}
+
 .window.manuell {
   justify-content: space-evenly;
 }
@@ -184,6 +188,10 @@ h2 {
   box-shadow: 0px 0px 20px 4px #00a6e5;
   margin-right: 15vw;
   margin-left: 1vw;
+}
+
+.focus3 {
+  margin-right: 2vw;
 }
 
 .nofocus {
@@ -349,8 +357,14 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 50px;
-  margin: 20px;
+  /* padding: 50px;
+  margin: 20px; */
+}
+
+.pop {
+  animation: scale .5s;
+  white-space: pre-line;
+  font-size: clamp(16px, 5vw, 55px);
 }
 
 span {
@@ -381,22 +395,23 @@ span {
 }
 
 .button_header {
+  scale: 0.9;
   width: fit-content;
   height: 70%;
   position: relative;
-  transition: width 5s ease-in-out 0.1s, border 3.0s, transform 0.3s;
+  /* transition: width 5s ease-in-out 0.1s, border 3.0s, transform 0.3s; */
   cursor: pointer;
   transition: all 0.3s;
   user-select: none;
 }
 
 .button_header:hover {
-  transform: scale(1.2);
+  scale: 1;
   cursor: pointer;
 }
 
 .button_header:active {
-  transform: scale(1);
+  transform: scale(0.8);
   cursor: pointer;
 }
 
@@ -410,7 +425,81 @@ span {
 .gear {
   position: absolute;
   right: 0;
-  margin-right: 20px;
+  margin-right: 2vw;
+  width: fit-content;
+  height: 65%;
+  cursor: pointer;
+  transition: all 0.3s;
+  user-select: none;
+}
+
+.gear:active {
+  scale: 0.8;
+}
+
+.gear.home {
+  transform: none;
+  scale: 0.5;
+  cursor: default;
+  opacity: 0.4;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-top: 3vw;
+  margin-right: 4vw;
+  width: 25%;
+  height: 80%;
+  animation: grow_popup;
+  background-color: #06263b;
+  box-shadow: 0px 0px 20px 10px #00a6e5;
+  border-radius: 3vw 0 2vw 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  transform-origin: top right;
+}
+
+.popupwindow {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding-left: 3vw;
+  padding-right: 3vw;
+}
+
+.hide {
+  animation: none;
+  height: 0;
+  width: 0;
+  box-shadow: none;
+}
+
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.375);
+}
+
+.selector-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.375);
+  z-index: 1;
+}
+
+.popup-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
 }
 
 #drop_zone {
@@ -507,11 +596,6 @@ span {
 .hidden {
   inset: 50%;
   overflow: hidden;
-}
-
-.hide {
-  height: 0 !important;
-  width: 0;
 }
 
 .trans {
@@ -626,5 +710,33 @@ body a:active {
   100% {
     transform: scale(1.0);
     box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes grow_popup {
+  0% {
+    scale: 0;
+  }
+
+  100% {
+    scale: 1;
+  }
+}
+
+@keyframes scale {
+  0% {
+    scale: 0;
+  }
+
+  10% {
+    scale: 0.1;
+  }
+
+  20% {
+    scale: 0.2;
+  }
+
+  100% {
+    scale: 1;
   }
 }

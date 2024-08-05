@@ -34,6 +34,7 @@ export function MultiSelectPopup({ required = true, onClick, type, names, serial
         text = `${_type} ${_name ?? serial ?? ""}`
     }
     return (<>
+        <div className={'selector-backdrop' + (!open ? ' hide' : '')} onClick={() => setOpen(!open)} />
         <button
             className={"selector_small color " + (open ? "" : "hover ") + (active !== undefined ? "checked" : "")}
             onClick={() => { setOpen(!open) }}>

@@ -8,16 +8,17 @@ import { Drop } from './pages/drop'
 import { Running } from './pages/running'
 import { Results } from './pages/results'
 import { Show_Konfig } from './pages/show_konfig'
+import { Popup } from "./components/Popup"
 import { DeviceContextProvider } from './hooks/deviceContextProvider'
 //import { Odds } from './pages/odds'
 
 const router = createHashRouter([{
   "path": "/", "element": <Header />,
   children: [
-    //{ "path": "/", "element": <Home /> },
-    { "path": "/", "element": <Konfig /> },
-    //{ "path": "/konfig", "element": <Konfig /> },
-    { "path": "/home", "element": <Home /> },
+    { "path": "/", "element": <Home /> },
+    //{ "path": "/", "element": <Konfig /> },
+    { "path": "/konfig", "element": <Konfig /> },
+    //{ "path": "/home", "element": <Home /> },
     { "path": "/manu", "element": <Manu /> },
     { "path": "/drop", "element": <Drop /> },
     { "path": "/running", "element": <Running /> },
