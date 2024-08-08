@@ -24,11 +24,7 @@ export function Header() {
 
     function back() {
         navigate(-1)
-    }
-
-    function show_popup() {
-        // setButtonPop(true)
-        setPopup(true)
+        sendMessage(JSON.stringify({ type: "back" }))
     }
 
     return <>

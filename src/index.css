@@ -186,12 +186,13 @@ h2 {
 
 .focus {
   box-shadow: 0px 0px 20px 4px #00a6e5;
-  margin-right: 15vw;
+  margin-right: 8vw;
   margin-left: 1vw;
 }
 
 .focus3 {
   margin-right: 2vw;
+  margin-left: 2vw;
 }
 
 .nofocus {
@@ -254,8 +255,17 @@ h2 {
 }
 
 .next {
-  margin-left: -7vw;
-  margin-right: 7vw;
+  margin-left: -5vw;
+  margin-right: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.next4 {
+  margin-left: 3vw;
+  margin-right: 3vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,7 +299,7 @@ h2 {
   border: 1px solid #00a6e5;
   color: #ffffff;
   background-color: #06263b;
-  font-size: clamp(16px, 3vw, 36px);
+  font-size: clamp(25px, 3vw, 37px);
   text-align: center;
   transition: all 0.3s;
   display: flex;

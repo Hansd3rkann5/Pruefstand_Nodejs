@@ -31,7 +31,6 @@ export function useMyWebsocket() {
 
     function reset() {
         setKonfig(undefined)
-        // setCheckifmanu(false)
         setCheckifauto(false)
         setCheckifconfig(false)
         setTestnum(0)
@@ -66,22 +65,23 @@ export function useMyWebsocket() {
             }
             if ("combinations" in lastJM) {
                 if (konfig) setTestcombinations(map_relays(lastJM["combinations"], konfig))
-                console.log(testcombinations.length)
                 setRunning(true)
             }
             if ("testnum" in lastJM) {
                 setTestnum(lastJM["testnum"])
             }
-            if ("manuell_comp" in lastJM) {
-                setCheckifmanu(true)
+            if ("manuell" in lastJM) {
                 setCheckifauto(false)
             }
             if ("auto" in lastJM) {
-                setCheckifmanu(false)
                 setCheckifauto(true)
             }
             if ("odds" in lastJM) {
                 setOdds([...odds, lastJM["odds"]])
+            }
+            if ("konfigquantity" in lastJM) {
+                setKonfigQuantity(lastJM["konfigquantity"])
+                console.log(konfigquantity)
             }
         }
     }, [socket.lastMessage])

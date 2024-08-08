@@ -15,7 +15,7 @@ export const ConfigCards: React.FC<{ configs: Partial<SingleConfig>[] }> = ({ co
 
     const { konfigquantity, checkifmanu, checkifconfig } = useMyWebsocket()
 
-    return (<div className="window konfig" style={{ justifyContent: (konfigquantity == 1 && !checkifconfig || checkifmanu ? 'center' : konfigquantity < 4 ? 'flex-start' : 'center') }}>
+    return (<div className="window konfig" style={{ justifyContent: (konfigquantity == 1 && !checkifconfig || checkifmanu ? 'center' : konfigquantity < 5 ? 'center' : '') }}>
         {configs.map((c, i) => <ConfigCard key={i} config={c} name={String(i + 1)} />)}
     </div>)
 }
@@ -27,7 +27,7 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
     const mybuttonRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        console.log(odds, konfigquantity)
+        console.log(konfigquantity)
     }, [odds])
 
     useEffect(() => {
@@ -47,8 +47,8 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
 
     return <>
         <div ref={mycardRef}
-            className={"konfigframe" + (String(testnum) == name ? " focus" : " nofocus") + (konfigquantity == 1 && !checkifconfig ? " single" : "") + (konfigquantity < 4 ? " focus3" : "")}
-            style={(name == '1' && String(testnum) == '1' && konfigquantity > 3 ? { marginLeft: '7vw' } : {}) || (name == '1' ? { marginLeft: '1vw' } : {}) || (konfigquantity < 4 ? { marginRight: '1vw' } : {})}>
+            className={"konfigframe" + (String(testnum) == name ? " focus" : " nofocus") + (konfigquantity == 1 && !checkifconfig ? " single" : "") + (konfigquantity < 5 ? " focus3" : "")}
+            style={(name == '1' && String(testnum) == '1' && konfigquantity > 4 ? { marginLeft: '7vw' } : {}) || (name == '1' ? { marginLeft: '1vw' } : {}) || (konfigquantity < 5 ? { marginRight: '1vw' } : {})}>
             <div className={"konfig component"}>Konfig {konfigquantity == 1 && !checkifconfig ? "" : name}</div>
             <div className="compframe">
                 <div className="component">
@@ -85,7 +85,7 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
                 <LinearProgressWithLabel className={(name < String(testnum) ? "done" : "")} value={String(testnum) == name ? progress : testnum <= Number(name) ? 0 : 100} />
             </div>
         </div>
-        <div ref={mybuttonRef} className={(testcombinations.length == testnum || checkifmanu ? "hidden hide" : String(testnum) == name && checkifauto == false ? "next" : "hidden hide")}>
+        <div ref={mybuttonRef} className={(testcombinations.length == testnum || checkifauto || String(testnum) !== name ? "hidden hide" : konfigquantity < 5 ? "next4" : "next")}>
             <button onClick={(progress != 100 ? undefined : next_test)} className={"button manuell" + (progress != 100 ? " not_allow" : " allow")}>{(">")} </button>
         </div>
     </>

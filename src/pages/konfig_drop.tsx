@@ -21,7 +21,7 @@ export function Drop() {
                 <label htmlFor="input-file" id="fileDropBox">
                     <form action="" method="get" style={{ display: "flex", flexDirection: "column", alignItems: "center", height: "17vh" }}>
                         <img id="upload" src="/assets/upload.png" alt="" />
-                        <div id="file-upload">Drop or upload file here.</div>
+                        <div id="file-upload">Upload file here.</div>
                         <input onChange={onUpload} type="file" id="input-file" />
                     </form>
                 </label>

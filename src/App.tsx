@@ -1,11 +1,10 @@
 import './App.css'
 import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom'
-import { Home } from './pages/home'
 import { Header } from './header'
-import { Konfig } from './pages/konfig'
+import { Home } from './pages/home'
+import { Konfig_Manu } from './pages/konfig_manu'
 import { Manu } from './pages/manu'
-import { Drop } from './pages/drop'
-import { Running } from './pages/running'
+import { Drop } from './pages/konfig_drop'
 import { Results } from './pages/results'
 import { Show_Konfig } from './pages/show_konfig'
 import { Popup } from "./components/Popup"
@@ -15,13 +14,12 @@ import { DeviceContextProvider } from './hooks/deviceContextProvider'
 const router = createHashRouter([{
   "path": "/", "element": <Header />,
   children: [
+    //{ "path": "/", "element": <Home /> },
     { "path": "/", "element": <Home /> },
-    //{ "path": "/", "element": <Konfig /> },
-    { "path": "/konfig", "element": <Konfig /> },
-    //{ "path": "/home", "element": <Home /> },
+    //{ "path": "/konfig", "element": <Konfig /> },
+    { "path": "/konfig_manu", "element": <Konfig_Manu /> },
     { "path": "/manu", "element": <Manu /> },
-    { "path": "/drop", "element": <Drop /> },
-    { "path": "/running", "element": <Running /> },
+    { "path": "/konfig_drop", "element": <Drop /> },
     { "path": "/results", "element": <Results /> },
     { "path": "/show_konfig", "element": <Show_Konfig /> },
     //{ "path": "/odds", "element": <Odds /> },
