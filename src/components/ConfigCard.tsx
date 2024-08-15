@@ -13,16 +13,16 @@ function LinearProgressWithLabel(props: LinearProgressProps & { value: number })
 
 export const ConfigCards: React.FC<{ configs: Partial<SingleConfig>[] }> = ({ configs }) => {
 
-    const { konfigquantity, checkifmanu, checkifconfig } = useMyWebsocket()
+    const { konfigquantity, checkifconfig } = useMyWebsocket()
 
-    return (<div className="window konfig" style={{ justifyContent: (konfigquantity == 1 && !checkifconfig || checkifmanu ? 'center' : konfigquantity < 5 ? 'center' : '') }}>
+    return (<div className="window konfig" style={{ justifyContent: (konfigquantity == 1 && !checkifconfig ? 'center' : konfigquantity < 5 ? 'center' : '') }}>
         {configs.map((c, i) => <ConfigCard key={i} config={c} name={String(i + 1)} />)}
     </div>)
 }
 
 export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string }> = ({ config, name }) => {
 
-    const { testnum, progress, checkifmanu, checkifconfig, checkifauto, testcombinations, konfigquantity, odds, sendMessage } = useMyWebsocket()
+    const { testnum, progress, checkifconfig, checkifauto, testcombinations, konfigquantity, odds, sendMessage } = useMyWebsocket()
     const mycardRef = useRef<HTMLDivElement>(null)
     const mybuttonRef = useRef<HTMLDivElement>(null)
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MultiSelectPopup } from "../components/MultiSelectPopUp";
+import { MultiSelectPopUp } from "../components/MultiSelectPopUp";
 import { useMyWebsocket } from "../hooks/websocket";
 import Slider from '@mui/material/Slider';
 import { useNavigate } from "react-router"
@@ -68,16 +68,16 @@ export function Manu() {
                 </div>
                 <div className="wrapper">
                     <div className="selector_2">
-                        <MultiSelectPopup type="Motor" active={current_comb.Motor} names={konfig?.Motor.map(m => m.name)} serials={konfig?.Motor.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
-                        <MultiSelectPopup type="Display" active={current_comb.Display} names={konfig?.Display.map(m => m.name)} serials={konfig?.Display.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Motor" active={current_comb.Motor} names={konfig?.Motor.map(m => m.name)} serials={konfig?.Motor.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Display" active={current_comb.Display} names={konfig?.Display.map(m => m.name)} serials={konfig?.Display.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
                     </div>
                     <div className="selector_2">
-                        <MultiSelectPopup type="Battery" active={current_comb.Battery} names={konfig?.Battery.map(m => m.name)} serials={konfig?.Battery.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
-                        <MultiSelectPopup type="Smartbox" active={current_comb.Smartbox} names={konfig?.Smartbox.map(m => m.name)} serials={konfig?.Smartbox.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Battery" active={current_comb.Battery} names={konfig?.Battery.map(m => m.name)} serials={konfig?.Battery.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Smartbox" active={current_comb.Smartbox} names={konfig?.Smartbox.map(m => m.name)} serials={konfig?.Smartbox.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
                     </div>
                     <div className="selector_2">
-                        <MultiSelectPopup required={false} type="Range EXT" active={current_comb["Range EXT"]} names={konfig?.["Range EXT"].map(m => m.name)} serials={konfig?.["Range EXT"].map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
-                        <MultiSelectPopup required={false} type="Ladegerät/Service Dongle" active={current_comb["Ladegerät/Service Dongle"]} names={konfig?.["Ladegerät/Service Dongle"].map(m => m.name)} serials={konfig?.["Ladegerät/Service Dongle"].map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp required={false} type="Range EXT" active={current_comb["Range EXT"]} names={konfig?.["Range EXT"].map(m => m.name)} serials={konfig?.["Range EXT"].map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp required={false} type="Ladegerät/Service Dongle" active={current_comb["Ladegerät/Service Dongle"]} names={konfig?.["Ladegerät/Service Dongle"].map(m => m.name)} serials={konfig?.["Ladegerät/Service Dongle"].map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
                     </div>
                 </div>
                 <div className="start_wrapper">

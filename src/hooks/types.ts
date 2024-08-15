@@ -23,8 +23,8 @@ export interface DeviceContextType {
     setKonfigQuantity: (v: number) => void
     testcombinations: Partial<SingleConfig>[]
     setTestcombinations: (v: Partial<SingleConfig>[]) => void
-    checkifmanu: boolean
-    setCheckifmanu: (v: boolean) => void
+    first: boolean
+    setFirst: (v: boolean) => void
     popup: boolean
     setPopup: (v: boolean) => void
     running: boolean

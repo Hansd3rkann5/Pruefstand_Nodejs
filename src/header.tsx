@@ -17,6 +17,12 @@ export function Header() {
     const { popup, setPopup } = useDeviceContext();
 
 
+    // useEffect(() => {
+    //     if (location.pathname === "/") {
+    //         sendMessage(JSON.stringify({ type: "home" }))
+    //     }
+    // }, [location.pathname])
+
     function home() {
         navigate("/")
         sendMessage(JSON.stringify({ type: "home" }))
@@ -31,7 +37,7 @@ export function Header() {
         <header onClick={() => setPopup(false)}>
             <House id="home" onClick={(location.pathname === "/" || location.pathname === "/show_konfig" ? undefined : home)}
                 className={"button_header left " + (location.pathname === "/" || location.pathname === "/show_konfig" ? "home" : "")} />
-            <Logo id="tq" className="img" />
+            <Logo id="tq" className="img" onClick={(location.pathname === "/show_konfig" ? home : undefined)} />
             <Back id="back" onClick={(location.pathname === "/" || location.pathname === "/results" || location.pathname === "/show_konfig" ? undefined : back)}
                 className={"button_header right " + (location.pathname === "/" || location.pathname === "/results" || location.pathname === "/show_konfig" ? "home" : "")} />
             <Settings id="gear" className={"button_header gear" + (location.pathname === "/" ? "" : " home")} onClick={(location.pathname === "/" ? () => setButtonPopup(true) : undefined)}>

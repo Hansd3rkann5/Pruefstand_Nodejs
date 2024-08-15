@@ -46,12 +46,12 @@ export function Popup(props: PopupProps) {
         <div className={'popup' + (!props.trigger ? ' hide' : '')}>
             <div className={'popup' + (props.trigger ? 'window download' : ' hide')}>
                 {(props.trigger) && (<>
-                    <div className='button' onClick={(download_master)}><span className='pop'>download master</span></div>
+                    <div className='button' onClick={(download_master)}><span className='pop'>download<br></br>master</span></div>
                     <hr id="sep" />
                     <label htmlFor="input-file">
                         <form action="" method='get'>
                             <div className='button'>
-                                <span className='pop'>upload master</span>
+                                <span className='pop'>upload<br></br>master</span>
                                 <input onChange={(onUpload)} type="file" id="input-file" />
                             </div>
                         </form>

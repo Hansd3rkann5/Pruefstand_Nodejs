@@ -1,9 +1,13 @@
 //import React, { useState, useCallback, useEffect } from 'react';
 import { useEffect, useState } from "react";
 import useWebSocket from "react-use-websocket"
-import { useNavigate } from "react-router"
+import { useNavigate, useLocation } from "react-router"
 import { useDeviceContext } from "./useDeviceContext";
 import { Comp_Konfig, SingleConfig } from "./types";
+import YAML from 'yaml'
+
+let x = true
+console.log(x)
 
 export function useWebSocket8000() {
     return useWebSocket<Record<string, any>>(
@@ -23,7 +27,6 @@ export function useMyWebsocket() {
         testnum, setTestnum,
         konfigquantity, setKonfigQuantity,
         running, setRunning,
-        checkifmanu, setCheckifmanu,
         testcombinations, setTestcombinations,
         odds, setOdds,
         checkifauto, setCheckifauto,
@@ -81,11 +84,13 @@ export function useMyWebsocket() {
             }
             if ("konfigquantity" in lastJM) {
                 setKonfigQuantity(lastJM["konfigquantity"])
-                console.log(konfigquantity)
+            }
+            if ("results" in lastJM) {
+                download_results(lastJM["results"])
             }
         }
     }, [socket.lastMessage])
-    return { sendMessage: socket.sendMessage, progress, konfig, testnum, konfigquantity, setKonfigQuantity, running, checkifmanu, testcombinations, checkdone, checkifconfig, checkifauto, odds }
+    return { sendMessage: socket.sendMessage, progress, konfig, testnum, konfigquantity, setKonfigQuantity, running, setCheckifauto, checkifauto, testcombinations, checkdone, checkifconfig, odds }
 }
 
 function map_relays(combinations: (number | null)[][], konfig: Comp_Konfig): Partial<SingleConfig>[] {
@@ -100,4 +105,29 @@ function map_relays(combinations: (number | null)[][], konfig: Comp_Konfig): Par
         }
         return conf
     })
+}
+
+function download_results(results: any) {
+    if (window.location.hostname !== 'localhost' && x) {
+        console.log('download results')
+        let text = YAML.stringify(results)
+        let currentdate = new Date();
+        let datetime = currentdate.getDate() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getFullYear() + "@ "
+            + currentdate.getHours() + ":"
+            + currentdate.getMinutes();
+        let filename = 'TestResults_' + (datetime) + '.txt'
+        let element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+        x = false
+    }
 }

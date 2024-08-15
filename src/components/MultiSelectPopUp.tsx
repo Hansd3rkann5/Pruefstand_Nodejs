@@ -12,7 +12,7 @@ function nullish<T extends any>(v?: T | null): v is undefined | null {
     return v === undefined || v === null
 }
 
-export function MultiSelectPopup({ required = true, onClick, type, names, serials, active }: MultiSelectPopProps) {
+export function MultiSelectPopUp({ required = true, onClick, type, names, serials, active }: MultiSelectPopProps) {
     const [open, setOpen] = useState(false)
     const _onClick = useCallback((id: number | null) => {
         setOpen(false)

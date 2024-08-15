@@ -375,6 +375,7 @@ h2 {
   animation: scale .5s;
   white-space: pre-line;
   font-size: clamp(16px, 5vw, 55px);
+  margin: 40px;
 }
 
 span {
@@ -458,10 +459,10 @@ span {
   position: fixed;
   top: 0;
   right: 0;
-  margin-top: 3vw;
+  margin-top: 5vh;
   margin-right: 4vw;
   width: 25%;
-  height: 80%;
+  height: 50%;
   animation: grow_popup;
   background-color: #06263b;
   box-shadow: 0px 0px 20px 10px #00a6e5;

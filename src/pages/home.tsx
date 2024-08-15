@@ -1,21 +1,24 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router"
 import { useMyWebsocket } from "../hooks/websocket";
+import { useDeviceContext } from "../hooks/useDeviceContext";
 
 export function Home() {
     const navigate = useNavigate();
-    const { sendMessage } = useMyWebsocket();
+    const { sendMessage, setCheckifauto } = useMyWebsocket();
+    const { first } = useDeviceContext();
 
     const auto = useCallback(() => {
+        first ? undefined : sendMessage(JSON.stringify({ type: "auto" }))
         sendMessage(JSON.stringify({ type: "auto" }))
+        setCheckifauto(true)
         navigate("/konfig_manu")
     }, [navigate, sendMessage])
 
     function manuell() {
+        first ? undefined : sendMessage(JSON.stringify({ type: "manuell" }))
         sendMessage(JSON.stringify({ type: "manuell" }))
-        //sendMessage(JSON.stringify({ type: "manuell" }))
         navigate("/konfig_manu")
-        //navigate("/home")
     }
 
     return <>
