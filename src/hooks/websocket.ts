@@ -1,7 +1,7 @@
 //import React, { useState, useCallback, useEffect } from 'react';
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useWebSocket from "react-use-websocket"
-import { useNavigate, useLocation } from "react-router"
+import { useNavigate } from "react-router"
 import { useDeviceContext } from "./useDeviceContext";
 import { Comp_Konfig, SingleConfig } from "./types";
 import YAML from 'yaml'
@@ -12,7 +12,7 @@ console.log(x)
 export function useWebSocket8000() {
     return useWebSocket<Record<string, any>>(
         "ws://" + window.location.hostname + ":8000" + "/ws/",
-        { share: true });
+        { share: true, 'shouldReconnect': () => true, 'retryOnError': true });
 }
 
 export function useMyWebsocket() {
@@ -32,14 +32,16 @@ export function useMyWebsocket() {
         checkifauto, setCheckifauto,
     } = useDeviceContext()
 
-    function reset() {
+
+    const reset = useCallback(() => {
         setKonfig(undefined)
         setCheckifauto(false)
         setCheckifconfig(false)
         setTestnum(0)
         setKonfigQuantity(1)
         setRunning(false)
-    }
+        x = true
+    }, [])
 
     useEffect(() => {
         if (lastJM) {
@@ -89,8 +91,8 @@ export function useMyWebsocket() {
                 download_results(lastJM["results"])
             }
         }
-    }, [socket.lastMessage])
-    return { sendMessage: socket.sendMessage, progress, konfig, testnum, konfigquantity, setKonfigQuantity, running, setCheckifauto, checkifauto, testcombinations, checkdone, checkifconfig, odds }
+    }, [lastJM])
+    return { ...socket, progress, konfig, testnum, konfigquantity, setKonfigQuantity, running, setCheckifauto, checkifauto, testcombinations, checkdone, checkifconfig, odds }
 }
 
 function map_relays(combinations: (number | null)[][], konfig: Comp_Konfig): Partial<SingleConfig>[] {
@@ -110,15 +112,15 @@ function map_relays(combinations: (number | null)[][], konfig: Comp_Konfig): Par
 function download_results(results: any) {
     if (window.location.hostname !== 'localhost' && x) {
         console.log('download results')
-        let text = YAML.stringify(results)
-        let currentdate = new Date();
-        let datetime = currentdate.getDate() + "/"
+        const text = YAML.stringify(results)
+        const currentdate = new Date();
+        const datetime = currentdate.getDate() + "/"
             + (currentdate.getMonth() + 1) + "/"
             + currentdate.getFullYear() + "@ "
             + currentdate.getHours() + ":"
             + currentdate.getMinutes();
-        let filename = 'TestResults_' + (datetime) + '.txt'
-        let element = document.createElement('a');
+        const filename = 'TestResults_' + (datetime) + '.txt'
+        const element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
         element.setAttribute('download', filename);
 

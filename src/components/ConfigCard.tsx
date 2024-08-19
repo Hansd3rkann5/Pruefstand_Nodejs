@@ -1,4 +1,4 @@
-import { useRef, createRef, useState, useEffect } from 'react';
+import { useRef, createRef, useState, useEffect, useCallback } from 'react';
 import { SingleConfig } from "../hooks/types";
 import { useMyWebsocket } from '../hooks/websocket';
 import * as React from 'react';
@@ -41,9 +41,9 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
         }
     }, [testnum])
 
-    function next_test() {
+    const next_test = useCallback(() => {
         sendMessage(JSON.stringify({ type: "next", id: null }))
-    }
+    }, [])
 
     return <>
         <div ref={mycardRef}
@@ -63,7 +63,7 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
                 <hr />
                 <div className="component">
                     <div className="component name">Battery:</div>
-                    <div className="component choice">{config.Battery?.name ?? "-"}</div>
+                    <div className="component choice">{config.Battery?.name + 'kWh' ?? "-"}</div>
                 </div>
                 <hr />
                 <div className="component">

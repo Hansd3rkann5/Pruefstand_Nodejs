@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router"
 import { useMyWebsocket } from "../hooks/websocket";
 import { useDeviceContext } from "../hooks/useDeviceContext";
@@ -9,17 +9,15 @@ export function Home() {
     const { first } = useDeviceContext();
 
     const auto = useCallback(() => {
-        first ? undefined : sendMessage(JSON.stringify({ type: "auto" }))
-        sendMessage(JSON.stringify({ type: "auto" }))
+        if (!first) sendMessage(JSON.stringify({ type: "auto" }))
+        navigate("/konfig_manu")
         setCheckifauto(true)
-        navigate("/konfig_manu")
-    }, [navigate, sendMessage])
+    }, [first, sendMessage, navigate, setCheckifauto])
 
-    function manuell() {
-        first ? undefined : sendMessage(JSON.stringify({ type: "manuell" }))
-        sendMessage(JSON.stringify({ type: "manuell" }))
+    const manuell = useCallback(() => {
+        if (!first) sendMessage(JSON.stringify({ type: "manuell" }))
         navigate("/konfig_manu")
-    }
+    }, [first, sendMessage, navigate])
 
     return <>
         <div className="window" id="window">

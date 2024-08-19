@@ -17,9 +17,9 @@ export function Popup(props: PopupProps) {
 
     function download_master() {
         console.log("click")
-        let text = YAML.stringify(konfig)
-        let filename = 'Master_Konfig.txt'
-        var element = document.createElement('a');
+        const text = YAML.stringify(konfig)
+        const filename = 'Master_Konfig.txt'
+        const element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
         element.setAttribute('download', filename);
 

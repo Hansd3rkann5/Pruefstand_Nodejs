@@ -1,29 +1,32 @@
 import { useNavigate } from "react-router"
 import { useMyWebsocket } from "../hooks/websocket";
-import { Popup } from "../components/Popup"
 import { useDeviceContext } from "../hooks/useDeviceContext";
-import { useState } from "react";
+import { useCallback, useEffect } from "react";
 
 export function Konfig_Manu() {
     const navigate = useNavigate();
     const { sendMessage, checkifauto } = useMyWebsocket();
     const { setPopup, first, setFirst } = useDeviceContext();
 
-    if (first) {
-        checkifauto ? sendMessage(JSON.stringify({ type: "auto" })) : sendMessage(JSON.stringify({ type: "manuell" }))
-        setFirst(false)
-        console.log(first)
-    }
+    useEffect(() => {
+        if (first) {
+            if (checkifauto) {
+                sendMessage(JSON.stringify({ type: "auto" }))
+            }
+            else { sendMessage(JSON.stringify({ type: "manuell" })) }
+            setFirst(false)
+        }
+    }, [first, setFirst, sendMessage, checkifauto])
 
-    function konfig() {
+    const konfig = useCallback(() => {
         sendMessage(JSON.stringify({ type: "konfig" }))
         navigate("/konfig_drop")
-    }
+    }, [sendMessage, navigate])
 
-    function manu() {
+    const manu = useCallback(() => {
         sendMessage(JSON.stringify({ type: "manuell_comp" }))
         navigate("/manu")
-    }
+    }, [sendMessage, navigate])
 
     return <>
         <div className="window" id="window" onClick={() => setPopup(false)}>

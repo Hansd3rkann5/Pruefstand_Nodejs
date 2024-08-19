@@ -5,36 +5,33 @@ import Logo from "../public/assets/Logo.svg?react"
 import House from "../public/assets/house.svg?react"
 import Back from "../public/assets/back.svg?react"
 import Settings from "../public/assets/settings.svg?react"
-import YAML from 'yaml'
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDeviceContext } from "./hooks/useDeviceContext";
+import { ReadyState } from "react-use-websocket";
 
 export function Header() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { running, konfig, sendMessage } = useMyWebsocket();
+    const { sendMessage, readyState } = useMyWebsocket();
     const [buttonpopup, setButtonPopup] = useState(false);
-    const { popup, setPopup } = useDeviceContext();
+    const { setPopup } = useDeviceContext();
 
-
-    // useEffect(() => {
-    //     if (location.pathname === "/") {
-    //         sendMessage(JSON.stringify({ type: "home" }))
-    //     }
-    // }, [location.pathname])
-
-    function home() {
-        navigate("/")
+    const home = useCallback(() => {
         sendMessage(JSON.stringify({ type: "home" }))
-    }
+        navigate("/")
+    }, [sendMessage, navigate])
 
-    function back() {
-        navigate(-1)
+    useEffect(() => {
+        console.log(sendMessage)
+    }, [sendMessage])
+
+    const back = useCallback(() => {
         sendMessage(JSON.stringify({ type: "back" }))
-    }
+        navigate(-1)
+    }, [sendMessage, navigate])
 
     return <>
-        <header onClick={() => setPopup(false)}>
+        <header onClick={() => setPopup(false)}>{readyState !== ReadyState.OPEN && readyState !== ReadyState.CONNECTING && <div className="con_error">connecting to server...</div>}
             <House id="home" onClick={(location.pathname === "/" || location.pathname === "/show_konfig" ? undefined : home)}
                 className={"button_header left " + (location.pathname === "/" || location.pathname === "/show_konfig" ? "home" : "")} />
             <Logo id="tq" className="img" onClick={(location.pathname === "/show_konfig" ? home : undefined)} />

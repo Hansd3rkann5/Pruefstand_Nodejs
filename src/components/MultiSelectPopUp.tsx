@@ -31,7 +31,7 @@ export function MultiSelectPopUp({ required = true, onClick, type, names, serial
         const serial = serials?.[active]
         const _type = type === "Ladegerät/Service Dongle" ? name : type
         const _name = type === "Ladegerät/Service Dongle" ? serial : name
-        text = `${_type} ${_name ?? serial ?? ""}`
+        text = `${_type} ${type === 'Battery' ? _name + 'kWh' : _name ?? serial ?? ""}`
     }
     return (<>
         <div className={'selector-backdrop' + (!open ? ' hide' : '')} onClick={() => setOpen(!open)} />
@@ -74,7 +74,7 @@ const CustomButton: React.FC<ButtonProps> = ({
         <button
             onClick={click}
             className={"selector_small manu hover " + (id === active ? "checked" : "")}
-        >{id === null ? `no ${type}` : `${name}`}
+        >{id === null ? `no ${type}` : type === 'Battery' ? `${name}kWh` : `${name}`}
             <div
                 className={(serial ? "small_serial" : "hidden")}
             >{serial ?? serial}</div></button>

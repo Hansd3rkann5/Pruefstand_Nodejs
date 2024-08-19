@@ -42,6 +42,15 @@ input {
   display: none;
 }
 
+.con_error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: red;
+  text-align: center;
+}
+
 header {
   background-color: #e0e0e0;
   height: 14%;

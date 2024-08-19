@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { MultiSelectPopUp } from "../components/MultiSelectPopUp";
 import { useMyWebsocket } from "../hooks/websocket";
 import Slider from '@mui/material/Slider';
 import { useNavigate } from "react-router"
-import { Combination, SingleConfig } from "../hooks/types";
+import { Combination } from "../hooks/types";
 
 
 
@@ -26,14 +26,14 @@ export function Manu() {
     const current_checked = is_all_checked(current_comb)
     const all_checked = combinations.length > 0 && combinations.every(c => is_all_checked(c))
 
-    function set_combinations() {
+    const set_combinations = useCallback(() => {
         if (all_checked) {
             sendMessage(JSON.stringify({ type: "set_combinations", comb: combinations }))
             navigate("/show_konfig")
         }
-    }
+    }, [all_checked, combinations, sendMessage, navigate])
 
-    function set_combination(id: number | null, type: string) {
+    const set_combination = useCallback((id: number | null, type: string) => {
         const _combinations = [...combinations]
         console.log(combinations)
         if (_combinations.length < konfigquantity) {
@@ -41,7 +41,7 @@ export function Manu() {
         }
         _combinations[konfigquantity - 1][type as "Display"] = id
         setCombinations(_combinations)
-    }
+    }, [combinations, konfigquantity])
 
     return <>
         <div className="window picker">
