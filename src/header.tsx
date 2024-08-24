@@ -5,7 +5,7 @@ import Logo from "../public/assets/Logo.svg?react"
 import House from "../public/assets/house.svg?react"
 import Back from "../public/assets/back.svg?react"
 import Settings from "../public/assets/settings.svg?react"
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDeviceContext } from "./hooks/useDeviceContext";
 import { ReadyState } from "react-use-websocket";
 
@@ -21,10 +21,6 @@ export function Header() {
         navigate("/")
     }, [sendMessage, navigate])
 
-    useEffect(() => {
-        console.log(sendMessage)
-    }, [sendMessage])
-
     const back = useCallback(() => {
         sendMessage(JSON.stringify({ type: "back" }))
         navigate(-1)
@@ -39,8 +35,6 @@ export function Header() {
                 className={"button_header right " + (location.pathname === "/" || location.pathname === "/results" || location.pathname === "/show_konfig" ? "home" : "")} />
             <Settings id="gear" className={"button_header gear" + (location.pathname === "/" ? "" : " home")} onClick={(location.pathname === "/" ? () => setButtonPopup(true) : undefined)}>
             </Settings>
-            {/* <img src={"../public/assets/c.png"} id="gear" className={"gear" + (location.pathname === "/" ? "" : " home")} onClick={(location.pathname === "/" ? () => setButtonPopup(true) : undefined)}> */}
-            {/* </img> */}
             <Popup trigger={buttonpopup} setTrigger={setButtonPopup}>
             </Popup>
         </header>

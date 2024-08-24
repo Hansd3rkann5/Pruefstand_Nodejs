@@ -1,10 +1,12 @@
 
 
 type PruefstandKomponente = { name: string | null, serial: string | null, relay: number }
+export type Metadata = { filename: string, created_at: number }
 
 export type Comp_Konfig = ConfigBase<PruefstandKomponente[]>
 export type SingleConfig = ConfigBase<PruefstandKomponente>
 export type Combination = ConfigBase<number | null>
+export type TestResults = Result<Metadata>
 
 
 type ConfigBase<A> = {
@@ -15,6 +17,12 @@ type ConfigBase<A> = {
     "Range EXT": A
     "Ladegerät/Service Dongle": A
 }
+
+// type 'Result<A> = {
+//     [id:string]: A
+// }'
+type Result<A> = Record<string, A>
+
 
 export interface DeviceContextType {
     testnum: number
@@ -31,12 +39,14 @@ export interface DeviceContextType {
     setRunning: (v: boolean) => void
     checkifconfig: boolean
     setCheckifconfig: (v: boolean) => void
-    konfig?: Comp_Konfig
-    setKonfig: (v?: Comp_Konfig) => void
+    master?: Comp_Konfig
+    setMaster: (v?: Comp_Konfig) => void
     checkdone: boolean
     setCheckdone: (v: boolean) => void
     checkifauto: boolean
     setCheckifauto: (v: boolean) => void
     odds: string[]
     setOdds: (v: string[]) => void
+    results: TestResults | undefined
+    setResults: (v: TestResults) => void
 }

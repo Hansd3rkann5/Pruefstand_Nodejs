@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Comp_Konfig, SingleConfig } from "./types";
+import { Comp_Konfig, SingleConfig, TestResults } from "./types";
 import { DeviceContext } from "./deviceContext";
 
 
@@ -14,9 +14,10 @@ export const DeviceContextProvider: React.FC<{ children: React.ReactNode }> = ({
     const [testcombinations, setTestcombinations] = useState<Partial<SingleConfig>[]>([])
     const [checkdone, setCheckdone] = useState(false)
     const [checkifconfig, setCheckifconfig] = useState(false)
-    const [konfig, setKonfig] = useState<Comp_Konfig>()
+    const [master, setMaster] = useState<Comp_Konfig>()
     const [checkifauto, setCheckifauto] = useState(false)
     const [odds, setOdds] = useState<string[]>([])
+    const [results, setResults] = useState<TestResults>()
 
     return (<DeviceContext.Provider value={{
         testnum, setTestnum,
@@ -27,8 +28,9 @@ export const DeviceContextProvider: React.FC<{ children: React.ReactNode }> = ({
         testcombinations, setTestcombinations,
         checkdone, setCheckdone,
         checkifconfig, setCheckifconfig,
-        konfig, setKonfig,
+        master, setMaster,
         checkifauto, setCheckifauto,
         odds, setOdds,
+        results, setResults,
     }} > {children} </DeviceContext.Provider>)
 }

@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router"
 import { useMyWebsocket } from "../hooks/websocket";
-import React, { ReactHTML, useState } from "react";
+import React from "react";
 
 export function Drop() {
 

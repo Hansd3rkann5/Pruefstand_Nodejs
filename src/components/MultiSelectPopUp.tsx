@@ -8,20 +8,25 @@ interface MultiSelectPopProps {
     active?: number | null
     onClick: (id: number | null, type: string) => void
 }
-function nullish<T extends any>(v?: T | null): v is undefined | null {
+
+function nullish<T>(v?: T | null): v is undefined | null {
     return v === undefined || v === null
 }
 
-export function MultiSelectPopUp({ required = true, onClick, type, names, serials, active }: MultiSelectPopProps) {
+export function MultiSelectPopUp({ required = true, onClick: onClicking, type, names, serials, active }: MultiSelectPopProps) {
     const [open, setOpen] = useState(false)
     const _onClick = useCallback((id: number | null) => {
         setOpen(false)
-        onClick(id, type)
-    }, [onClick, type])
+        onClicking(id, type)
+    }, [onClicking, type])
     let text = ""
     if (nullish(active)) {
         if (active === null) {
-            text = 'no ' + type
+            if (type === "Ladegerät/Service Dongle") {
+                text = 'kein ' + 'Ladegerät oder\nService Dongle'
+            } else {
+                text = 'kein ' + type
+            }
         }
         else if (type === "Ladegerät/Service Dongle") {
             text = "Ladegeräte\nService Dongle"
@@ -41,7 +46,7 @@ export function MultiSelectPopUp({ required = true, onClick, type, names, serial
             {text}
         </button>
         <div className={"comp_selector " + (open ? "" : "hidden")} id="comp_selector">
-            {!required && <CustomButton type={type} name={"no"} serial={""} onClick={_onClick} id={null} active={active} />}
+            {!required && <CustomButton type={type} name={"kein"} serial={""} onClick={_onClick} id={null} active={active} />}
             {names?.map((n, i) => (
                 <CustomButton type={type} name={n ?? serials?.[i]} serial={!n ? '' : serials?.[i]} onClick={_onClick} id={i} key={i} active={active} />
             ))}
@@ -59,22 +64,22 @@ interface ButtonProps {
     active: number | undefined | null;
 }
 const CustomButton: React.FC<ButtonProps> = ({
+    type = 'Motor',
     id,
     name,
     serial,
     onClick,
     active,
-    type = 'Motor',
 }) => {
     const click = useCallback(() => {
         onClick(id);
     }, [id, onClick]);
-    if (!name && !serial) return null
+    if (!name && !serial) { return null }
     return (
         <button
             onClick={click}
             className={"selector_small manu hover " + (id === active ? "checked" : "")}
-        >{id === null ? `no ${type}` : type === 'Battery' ? `${name}kWh` : `${name}`}
+        >{id === null ? `kein ${type}` : type === 'Battery' ? `${name}kWh` : `${name}`}
             <div
                 className={(serial ? "small_serial" : "hidden")}
             >{serial ?? serial}</div></button>

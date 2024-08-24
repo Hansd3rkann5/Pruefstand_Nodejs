@@ -18,7 +18,7 @@ function is_all_checked(current_comb: Partial<Combination>) {
 
 export function Manu() {
 
-    const { sendMessage, konfig, konfigquantity, setKonfigQuantity } = useMyWebsocket();
+    const { sendMessage, master, konfigquantity, setKonfigQuantity } = useMyWebsocket();
     const navigate = useNavigate();
     const handleChange = (event: Event) => { setKonfigQuantity((event.target as any)?.value == 0 ? 1 : (event.target as any)?.value) }
     const [combinations, setCombinations] = useState<Partial<Combination>[]>([])
@@ -68,16 +68,16 @@ export function Manu() {
                 </div>
                 <div className="wrapper">
                     <div className="selector_2">
-                        <MultiSelectPopUp type="Motor" active={current_comb.Motor} names={konfig?.Motor.map(m => m.name)} serials={konfig?.Motor.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
-                        <MultiSelectPopUp type="Display" active={current_comb.Display} names={konfig?.Display.map(m => m.name)} serials={konfig?.Display.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Motor" active={current_comb.Motor} names={master?.Motor.map(m => m.name)} serials={master?.Motor.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Display" active={current_comb.Display} names={master?.Display.map(m => m.name)} serials={master?.Display.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
                     </div>
                     <div className="selector_2">
-                        <MultiSelectPopUp type="Battery" active={current_comb.Battery} names={konfig?.Battery.map(m => m.name)} serials={konfig?.Battery.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
-                        <MultiSelectPopUp type="Smartbox" active={current_comb.Smartbox} names={konfig?.Smartbox.map(m => m.name)} serials={konfig?.Smartbox.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Battery" active={current_comb.Battery} names={master?.Battery.map(m => m.name)} serials={master?.Battery.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Smartbox" active={current_comb.Smartbox} names={master?.Smartbox.map(m => m.name)} serials={master?.Smartbox.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
                     </div>
                     <div className="selector_2">
-                        <MultiSelectPopUp required={false} type="Range EXT" active={current_comb["Range EXT"]} names={konfig?.["Range EXT"].map(m => m.name)} serials={konfig?.["Range EXT"].map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
-                        <MultiSelectPopUp required={false} type="Ladegerät/Service Dongle" active={current_comb["Ladegerät/Service Dongle"]} names={konfig?.["Ladegerät/Service Dongle"].map(m => m.name)} serials={konfig?.["Ladegerät/Service Dongle"].map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp required={false} type="Range EXT" active={current_comb["Range EXT"]} names={master?.["Range EXT"].map(m => m.name)} serials={master?.["Range EXT"].map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp required={false} type="Ladegerät/Service Dongle" active={current_comb["Ladegerät/Service Dongle"]} names={master?.["Ladegerät/Service Dongle"].map(m => m.name)} serials={master?.["Ladegerät/Service Dongle"].map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
                     </div>
                 </div>
                 <div className="start_wrapper">
@@ -88,7 +88,7 @@ export function Manu() {
                     <button
                         style={{ marginRight: '3vw' }}
                         className={"start " + (current_checked ? "allow " : "not_allow ")} id="next"
-                        onClick={() => (current_checked ? setKonfigQuantity(konfigquantity + 1) : undefined)}>Nächste Konfiguration</button>
+                        onClick={() => (current_checked ? setKonfigQuantity(konfigquantity + 1) : undefined)}>Weitere Konfiguration</button>
                 </div>
             </div>
         </div>

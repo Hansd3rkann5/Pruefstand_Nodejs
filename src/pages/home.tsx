@@ -26,7 +26,7 @@ export function Home() {
             </div>
             <hr id="sep" />
             <div id="manuell">
-                <div onClick={manuell} className="button"><span>Manuelles<br />durchlaufen<br />der Kombinatoriken</span></div>
+                <div onClick={manuell} className="button"><span>Manuelles<br />durchlaufen<br />der Kombinationen</span></div>
             </div>
         </div>
     </>

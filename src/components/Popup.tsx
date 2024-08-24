@@ -1,5 +1,4 @@
 import YAML from 'yaml'
-import { useState } from "react";
 import React from 'react'
 import { useMyWebsocket } from "../hooks/websocket";
 
@@ -12,12 +11,12 @@ interface PopupProps {
 
 export function Popup(props: PopupProps) {
 
-    const { konfig, sendMessage } = useMyWebsocket();
+    const { master, sendMessage } = useMyWebsocket();
 
 
     function download_master() {
         console.log("click")
-        const text = YAML.stringify(konfig)
+        const text = YAML.stringify(master)
         const filename = 'Master_Konfig.txt'
         const element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
