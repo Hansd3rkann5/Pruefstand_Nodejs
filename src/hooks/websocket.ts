@@ -8,6 +8,7 @@ import { Comp_Konfig, SingleConfig } from "./types";
 import YAML from 'yaml'
 
 let x = true
+let y = true
 
 export function useWebSocket8000() {
     return useWebSocket<Record<string, any>>(
@@ -33,7 +34,6 @@ export function useMyWebsocket() {
         checkifauto, setCheckifauto,
         results, setResults,
     } = useDeviceContext()
-
 
     const reset = useCallback(() => {
         setCheckdone(false)
@@ -89,7 +89,13 @@ export function useMyWebsocket() {
                 setKonfigQuantity(lastJM["konfigquantity"])
             }
             if ("results" in lastJM) {
-                setResults(lastJM["results"])
+                if (y) {
+                    setResults(lastJM["results"])
+                    y = false
+                    setTimeout(() => {
+                        y = true
+                    }, 100)
+                }
             }
             if ("filename" in lastJM) {
                 setFilename(lastJM["filename"])
@@ -98,7 +104,7 @@ export function useMyWebsocket() {
                 download_results(filename, lastJM["download"])
             }
         }
-    }, [lastJM])
+    }, [lastJM, results])
     return { ...socket, progress, master, testnum, konfigquantity, setKonfigQuantity, running, checkifauto, setCheckifauto, testcombinations, checkdone, checkifconfig, odds, results, filename }
 }
 
@@ -118,7 +124,6 @@ function map_relays(combinations: (number | null)[][], master: Comp_Konfig): Par
 
 function download_results(filename: string, file: any) {
     if (x) {
-        console.log(file)
         const text = YAML.stringify(file)
         const element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));

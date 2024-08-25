@@ -1,7 +1,7 @@
 
 
 type PruefstandKomponente = { name: string | null, serial: string | null, relay: number }
-export type Metadata = { filename: string, created_at: number }
+export type Metadata = { filename: string, created_at: number, emcy: boolean }
 
 export type Comp_Konfig = ConfigBase<PruefstandKomponente[]>
 export type SingleConfig = ConfigBase<PruefstandKomponente>
@@ -18,9 +18,6 @@ type ConfigBase<A> = {
     "Ladegerät/Service Dongle": A
 }
 
-// type 'Result<A> = {
-//     [id:string]: A
-// }'
 type Result<A> = Record<string, A>
 
 

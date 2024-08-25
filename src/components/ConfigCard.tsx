@@ -37,6 +37,7 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
         }
     }, [checkifauto, name, testnum])
 
+
     const next_test = useCallback(() => {
         // if (window.location.hostname === 'localhost') {
         //     sendMessage(JSON.stringify({ type: "manuell" }))
@@ -46,8 +47,9 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
 
     return <>
         <div ref={mycardRef}
-            className={"konfigframe" + (String(testnum) == name ? " focus" : " nofocus") + (konfigquantity == 1 && !checkifconfig ? " single" : "") + (konfigquantity < 5 ? " focus3" : "")}
-            style={(name == '1' && String(testnum) == '1' && konfigquantity > 4 ? { marginLeft: '7vw' } : {}) || (name == '1' ? { marginLeft: '1vw' } : {}) || (konfigquantity < 5 ? { marginRight: '1vw' } : {})}>
+            className={"konfigframe" + (String(testnum) == name ? " focus" : " nofocus") + (konfigquantity == 1 && !checkifconfig ? " single" : "") + (konfigquantity < 5 ? " focus3" : "") + (window.location.hostname !== 'localhast' ? " pc" : "")}
+            style={(name == '1' && String(testnum) == '1' && konfigquantity > 4 ? { marginLeft: '7vw' } : {}) ||
+                (name == '1' ? { marginLeft: '1vw' } : {}) || (konfigquantity < 5 ? { marginRight: '1vw' } : {})}>
             <div className={"konfig component"}>Konfig. {konfigquantity == 1 && !checkifconfig ? "" : name}</div>
             <div className="compframe">
                 <div className="component">

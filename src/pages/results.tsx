@@ -30,8 +30,8 @@ export function Results() {
                         </thead>
                         <div className='shadow'></div>
                         <tbody>
-                            {Object.values(results ?? {}).map((metadata, i) => (
-                                <ShowResults result={metadata} key={i} />
+                            {Object.values(results ?? {}).map((g, i) => (
+                                <ShowResults result={g} key={i} />
                             ))}
                         </tbody>
                     </table>
