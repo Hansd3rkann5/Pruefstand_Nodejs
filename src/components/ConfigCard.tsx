@@ -39,9 +39,6 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, name: string 
 
 
     const next_test = useCallback(() => {
-        // if (window.location.hostname === 'localhost') {
-        //     sendMessage(JSON.stringify({ type: "manuell" }))
-        // }
         sendMessage(JSON.stringify({ type: "next", id: null }))
     }, [sendMessage])
 
