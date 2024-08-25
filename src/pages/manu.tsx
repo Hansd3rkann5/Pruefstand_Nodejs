@@ -20,6 +20,7 @@ export function Manu() {
 
     const { sendMessage, master, konfigquantity, setKonfigQuantity } = useMyWebsocket();
     const navigate = useNavigate();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event: Event) => { setKonfigQuantity((event.target as any)?.value == 0 ? 1 : (event.target as any)?.value) }
     const [combinations, setCombinations] = useState<Partial<Combination>[]>([])
     const current_comb = combinations[konfigquantity - 1] ?? {}
