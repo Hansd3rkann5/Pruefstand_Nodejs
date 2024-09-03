@@ -14,4 +14,4 @@ Kein wiederholendes Element. Zeigt die Oberfläche für "download master"/"uploa
 ### ShowResult
 Repräsentiert eine Zeile der Ergebnisdarstellung. Dabei werden Datum und Uhrzeit eines Testergebnisses angezeigt
 
-## [hooks]([https://github.com/Hansd3rkann5/Pruefstand_Nodejs/tree/main/src/hooks])
+## [hooks](https://github.com/Hansd3rkann5/Pruefstand_Nodejs/tree/main/src/hooks)
