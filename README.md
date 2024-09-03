@@ -1,30 +1,17 @@
-# React + TypeScript + Vite
+# Quellcode des Clients
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+In diesem Repository ist der gesamte Quellcode des Clients hinterlegt. Alle programmierten Dateien sind im Ordner "src" abgespeichert.
 
-Currently, two official plugins are available:
+## Components
+In diesem Ordner sind die Komponenten abgespeichert, welche sich wiederholende Elemente der Weboberfläche sind. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### ConfigCard
+Anzeige einer Konfiguration nach Start eines Tests
+### MultiSelectPopUp
+Anzeige der Variantenauswahl einer Komponentenkategorie
+### Popup
+Kein wiederholendes Element. Zeigt die Oberfläche für "download master"/"upload master" auf der Startseite der Anwendung an
+### ShowResult
+Repräsentiert eine Zeile der Ergebnisdarstellung. Dabei werden Datum und Uhrzeit eines Testergebnisses angezeigt
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## [hooks](url)
