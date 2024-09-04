@@ -9,6 +9,7 @@ import YAML from 'yaml'
 
 let x = true
 let y = true
+let z = true
 
 export function useWebSocket8000() {
     return useWebSocket<Record<string, any>>(
@@ -43,7 +44,6 @@ export function useMyWebsocket() {
         setCheckifconfig(false)
         setTestnum(0)
         setKonfigQuantity(1)
-        setRunning(false)
     }, [])
 
     useEffect(() => {
@@ -61,6 +61,12 @@ export function useMyWebsocket() {
             }
             if ("master" in lastJM) {
                 setMaster(lastJM["master"])
+                console.log(lastJM["running"])
+                if (lastJM["running"]) {
+                    setTimeout(() => {
+                        window.alert("Bitte Warten. Es läuft gerade ein Test. Bei Abschluss werden sie zu den Testergebnissen weitergeleitet.\nBitte schließen...")
+                    }, 1000)
+                }
                 navigate("/")
             }
             if ("Upload erfolgreich" in lastJM) {
@@ -89,6 +95,7 @@ export function useMyWebsocket() {
                 setKonfigQuantity(lastJM["konfigquantity"])
             }
             if ("results" in lastJM) {
+                setRunning(false)
                 if (y) {
                     setResults(lastJM["results"])
                     y = false
@@ -102,6 +109,17 @@ export function useMyWebsocket() {
             }
             if ("download" in lastJM) {
                 download_results(filename, lastJM["download"])
+            }
+            if ("false upload" in lastJM) {
+                console.log(z)
+                if (z) {
+                    window.alert("Hochgeladene Datei entspricht nicht den Anforderungen")
+                    z = false
+                    setTimeout(() => {
+                        z = true
+                        console.log(z)
+                    }, 500)
+                }
             }
         }
     }, [lastJM, results])
@@ -124,10 +142,13 @@ function map_relays(combinations: (number | null)[][], master: Comp_Konfig): Par
 
 function download_results(filename: string, file: any) {
     if (x) {
-        const text = YAML.stringify(file)
+        const text = YAML.stringify(file);
+        const name = filename.slice(0, -8);
+
+
         const element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-        element.setAttribute('download', filename.slice(0, -8));
+        element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', name);
 
         element.style.display = 'none';
         document.body.appendChild(element);
@@ -135,9 +156,10 @@ function download_results(filename: string, file: any) {
         element.click();
 
         document.body.removeChild(element);
-        x = false
+        x = false;
         setTimeout(() => {
-            x = true
-        }, 1000)
+            x = true;
+        }, 1000);
     }
 }
+

@@ -182,22 +182,40 @@ h2 {
   background: #1bc51b;
 }
 
+.res_local {
+  font-size: 60px;
+  color: #00a6e5;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+}
+
 .konfigframe {
-  min-width: 255px;
+  min-width: 270px;
   overflow-y: hidden;
   position: relative;
   background-color: #06263b;
   text-align: center;
-  transition: all 0.3s;
+  transition: all 0.7s;
   display: flex;
   align-items: center;
   justify-content: start;
   flex-direction: column;
   z-index: 1;
-  border-radius: 25px 25px 0px 25px;
+  border-radius: 30px 30px 0 30px;
   margin: 20px;
   padding: 15px;
   scroll-behavior: smooth;
+}
+
+.pc {
+  min-width: 350px !important;
 }
 
 .browser {
@@ -206,7 +224,7 @@ h2 {
   background-color: #06263b;
   transition: all 0.3s;
   z-index: 1;
-  border-radius: 3vw 3vw 0 3vw;
+  border-radius: 2vw 2vw 0 2vw;
   font-size: clamp(20px, 45px, 60px);
   color: #00a6e5;
   box-shadow: 0px 0px 20px 4px #000000;
@@ -296,13 +314,6 @@ h2 {
       border-top: 2px solid #00a6e5;
       border-bottom: 2px solid #00a6e5;
     }
-
-    // tr:hover {
-    //   box-shadow: 0px 0px 20px 4px #00a6e5;
-    //   z-index: 2;
-    //   scale: 1.05;
-
-    // }
   }
 
   tbody td,
@@ -333,18 +344,33 @@ h2 {
 
 
 .iconbutton:hover {
-  transform: scale(1.5);
+  transform: scale(1.3);
 }
 
 .iconbutton:active {
-  transform: scale(1.2);
+  transform: scale(.1);
+}
+
+.inprog {
+  z-index: -5;
+  animation: delete 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 .focus {
-  box-shadow: 0px 0px 20px 4px #00a6e5;
+  animation: pulse-animation-card 2s infinite;
+  animation-timing-function: ease-in-out;
   margin-right: 8vw;
-  margin-left: 1vw;
+  margin-left: 16vw;
 }
+
+.completed {
+  scale: 0.7;
+  margin-right: -170px;
+  transform: perspective(700px) rotateY(17deg) !important;
+}
+
 
 .text {
   padding: 10px;
@@ -363,12 +389,7 @@ h2 {
 .single {
   margin-right: 0 !important;
   margin-left: 0 !important;
-  transform: scale(1) !important;
   width: 280px
-}
-
-.pc {
-  width: 350px !important;
 }
 
 .compframe {
@@ -463,7 +484,7 @@ h2 {
   border: 1px solid #00a6e5;
   color: #ffffff;
   background-color: #06263b;
-  font-size: clamp(25px, 3vw, 35px);
+  font-size: clamp(25px, 3vw, 33px);
   text-align: center;
   transition: all 0.3s;
   display: flex;
@@ -477,7 +498,12 @@ h2 {
 
 .small_serial {
   font-size: 25px;
-  height: 2vh;
+  height: fit-content;
+}
+
+.relay {
+  font-size: 23px;
+  height: fit-content;
 }
 
 .color {
@@ -487,6 +513,7 @@ h2 {
 .checked {
   background-color: #00a6e5;
   scale: 0.9;
+  font-weight: bolder;
 }
 
 .checked:hover {
@@ -496,7 +523,6 @@ h2 {
 
 .hover:hover {
   box-shadow: 0px 0px 20px 10px #00a6e5;
-  ;
   transform: scale(1.05);
   cursor: pointer;
 }
@@ -507,7 +533,7 @@ h2 {
 }
 
 .manu {
-  height: 50%;
+  height: 55%;
 }
 
 .manu:active {
@@ -547,7 +573,8 @@ span {
   border-radius: 10px;
   margin: 30px;
   margin-left: 10px;
-  padding: 3vh;
+  padding: 5vh;
+  height: 20%;
   color: #000000;
 }
 
@@ -931,5 +958,89 @@ body a:active {
 
   100% {
     scale: 1;
+  }
+}
+
+@keyframes delete {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  8% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+
+  15% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate(2000px);
+    opacity: 0;
+  }
+}
+
+@keyframes wave {
+  0% {
+    clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%);
+  }
+
+  5%,
+  15% {
+    transform: scale(1.5);
+    clip-path: polygon(0% 0%, 10% 0%, 10% 100%, 0% 100%);
+  }
+
+  25% {
+    transform: scale(1);
+    clip-path: polygon(10% 0%, 20% 0%, 20% 100%, 10% 100%);
+  }
+
+  35%,
+  45% {
+    transform: scale(1.5);
+    clip-path: polygon(20% 0%, 30% 0%, 30% 100%, 20% 100%);
+  }
+
+  55% {
+    transform: scale(1);
+    clip-path: polygon(30% 0%, 40% 0%, 40% 100%, 30% 100%);
+  }
+
+  65%,
+  75% {
+    transform: scale(1.5);
+    clip-path: polygon(40% 0%, 50% 0%, 50% 100%, 40% 100%);
+  }
+
+  85% {
+    transform: scale(1);
+    clip-path: polygon(50% 0%, 60% 0%, 60% 100%, 50% 100%);
+  }
+
+  95%,
+  100% {
+    transform: scale(1.5);
+    clip-path: polygon(60% 0%, 100% 0%, 100% 100%, 60% 100%);
+  }
+}
+
+@keyframes pulse-animation-card {
+  0% {
+    box-shadow: 0 0 10px 5px #00a6e5;
+    transform: scale(.92);
+  }
+
+  50% {
+    box-shadow: 0px 0px 40px 20px #00a6e5;
+    transform: scale(.95);
+  }
+
+  100% {
+    transform: scale(.92);
+    box-shadow: 0px 0px 10px 5px #00a6e5;
   }
 }

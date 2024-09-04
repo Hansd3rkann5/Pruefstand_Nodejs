@@ -15,7 +15,7 @@ export function Popup(props: PopupProps) {
 
 
     function download_master() {
-        console.log("click")
+        sendMessage(JSON.stringify({ type: "error_list" }))
         const text = YAML.stringify(master)
         const filename = 'Master_Konfig.txt'
         const element = document.createElement('a');
@@ -34,6 +34,7 @@ export function Popup(props: PopupProps) {
     const onUpload: React.ChangeEventHandler<HTMLInputElement> = (data) => {
         if (data.target.files) {
             console.log(data.target.files[0].text().then((text) => {
+                console.log(data)
                 props.setTrigger(false)
                 sendMessage(JSON.stringify({ type: "Master-File", text }))
             }))

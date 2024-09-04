@@ -10,7 +10,6 @@ export function Drop() {
             console.log(data.target.files[0].text().then((text) => {
                 sendMessage(JSON.stringify({ "type": "Konfig-File", text }))
             }))
-
         }
     }
 

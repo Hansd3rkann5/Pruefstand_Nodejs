@@ -69,16 +69,46 @@ export function Manu() {
                 </div>
                 <div className="wrapper">
                     <div className="selector_2">
-                        <MultiSelectPopUp type="Motor" active={current_comb.Motor} names={master?.Motor.map(m => m.name)} serials={master?.Motor.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
-                        <MultiSelectPopUp type="Display" active={current_comb.Display} names={master?.Display.map(m => m.name)} serials={master?.Display.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Motor"
+                            active={current_comb.Motor}
+                            names={master?.Motor.map(m => m.name)}
+                            serials={master?.Motor.map(s => s.serial)}
+                            relays={master?.Motor.map(r => r.relay)}
+                            onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Display"
+                            active={current_comb.Display}
+                            names={master?.Display.map(m => m.name)}
+                            serials={master?.Display.map(s => s.serial)}
+                            relays={master?.Display.map(r => r.relay)}
+                            onClick={(id, type) => { set_combination(id, type) }} />
                     </div>
                     <div className="selector_2">
-                        <MultiSelectPopUp type="Battery" active={current_comb.Battery} names={master?.Battery.map(m => m.name)} serials={master?.Battery.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
-                        <MultiSelectPopUp type="Smartbox" active={current_comb.Smartbox} names={master?.Smartbox.map(m => m.name)} serials={master?.Smartbox.map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Battery"
+                            active={current_comb.Battery}
+                            names={master?.Battery.map(m => m.name)}
+                            serials={master?.Battery.map(s => s.serial)}
+                            relays={master?.Battery.map(r => r.relay)}
+                            onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp type="Smartbox"
+                            active={current_comb.Smartbox}
+                            names={master?.Smartbox.map(m => m.name)}
+                            serials={master?.Smartbox.map(s => s.serial)}
+                            relays={master?.Smartbox.map(r => r.relay)}
+                            onClick={(id, type) => { set_combination(id, type) }} />
                     </div>
                     <div className="selector_2">
-                        <MultiSelectPopUp required={false} type="Range EXT" active={current_comb["Range EXT"]} names={master?.["Range EXT"].map(m => m.name)} serials={master?.["Range EXT"].map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
-                        <MultiSelectPopUp required={false} type="Ladegerät/Service Dongle" active={current_comb["Ladegerät/Service Dongle"]} names={master?.["Ladegerät/Service Dongle"].map(m => m.name)} serials={master?.["Ladegerät/Service Dongle"].map(s => s.serial)} onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp required={false} type="Range EXT"
+                            active={current_comb["Range EXT"]}
+                            names={master?.["Range EXT"].map(m => m.name)}
+                            serials={master?.["Range EXT"].map(s => s.serial)}
+                            relays={master?.["Range EXT"].map(r => r.relay)}
+                            onClick={(id, type) => { set_combination(id, type) }} />
+                        <MultiSelectPopUp required={false} type="Ladegerät/Service Dongle"
+                            active={current_comb["Ladegerät/Service Dongle"]}
+                            names={master?.["Ladegerät/Service Dongle"].map(m => m.name)}
+                            serials={master?.["Ladegerät/Service Dongle"].map(s => s.serial)}
+                            relays={master?.["Ladegerät/Service Dongle"].map(r => r.relay)}
+                            onClick={(id, type) => { set_combination(id, type) }} />
                     </div>
                 </div>
                 <div className="start_wrapper">

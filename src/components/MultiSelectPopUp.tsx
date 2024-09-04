@@ -5,6 +5,7 @@ interface MultiSelectPopProps {
     type: string
     names?: (string | null)[]
     serials?: (string | null)[]
+    relays?: (number | null)[]
     active?: number | null
     onClick: (id: number | null, type: string) => void
 }
@@ -13,7 +14,7 @@ function nullish<T>(v?: T | null): v is undefined | null {
     return v === undefined || v === null
 }
 
-export function MultiSelectPopUp({ required = true, onClick: onClicking, type, names, serials, active }: MultiSelectPopProps) {
+export function MultiSelectPopUp({ required = true, onClick: onClicking, type, names, serials, relays, active }: MultiSelectPopProps) {
     const [open, setOpen] = useState(false)
     const _onClick = useCallback((id: number | null) => {
         setOpen(false)
@@ -31,7 +32,7 @@ export function MultiSelectPopUp({ required = true, onClick: onClicking, type, n
         else if (type === "Ladegerät/Service Dongle") {
             text = "Ladegeräte\nService Dongle"
         } else { text = `${type}` }
-    } else {
+    } else if (relays?.[active] !== null) {
         const name = names?.[active]
         const serial = serials?.[active]
         const _type = type === "Ladegerät/Service Dongle" ? name : type
@@ -44,11 +45,12 @@ export function MultiSelectPopUp({ required = true, onClick: onClicking, type, n
             className={"selector_small color " + (open ? "" : "hover ") + (active !== undefined ? "checked" : "")}
             onClick={() => { setOpen(!open) }}>
             {text}
+            <div className={typeof active === 'number' && relays?.[active] === undefined ? "hide hidden" : "relay"}>{typeof active === 'number' ? `Relais: ${relays?.[active]}` : ""}</div>
         </button>
         <div className={"comp_selector " + (open ? "" : "hidden")} id="comp_selector">
-            {!required && <CustomButton type={type} name={"kein"} serial={""} onClick={_onClick} id={null} active={active} />}
+            {!required && <CustomButton type={type} name={"kein"} serial={""} onClick={_onClick} id={null} active={active} relay={null} />}
             {names?.map((n, i) => (
-                <CustomButton type={type} name={n ?? serials?.[i]} serial={!n ? '' : serials?.[i]} onClick={_onClick} id={i} key={i} active={active} />
+                <CustomButton type={type} name={n ?? serials?.[i]} serial={!n ? '' : serials?.[i]} relay={relays?.[i]} onClick={_onClick} id={i} key={i} active={active} />
             ))}
         </div>
     </>)
@@ -57,7 +59,8 @@ export function MultiSelectPopUp({ required = true, onClick: onClicking, type, n
 // Button
 interface ButtonProps {
     type: string;
-    id: number | null;
+    id: number | null
+    relay: number | null | undefined
     name?: string | null
     serial?: string | null
     onClick: (id: number | null) => void;
@@ -67,6 +70,7 @@ const CustomButton: React.FC<ButtonProps> = ({
     type = 'Motor',
     id,
     name,
+    relay,
     serial,
     onClick,
     active,
@@ -78,10 +82,11 @@ const CustomButton: React.FC<ButtonProps> = ({
     return (
         <button
             onClick={click}
-            className={"selector_small manu hover " + (id === active ? "checked" : "")}
-        >{id === null ? `kein ${type}` : type === 'Battery' ? `${name}kWh` : `${name}`}
-            <div
-                className={(serial ? "small_serial" : "hidden")}
-            >{serial ?? serial}</div></button>
+            className={"selector_small manu hover " + (id === active ? "checked" : "")}>
+            {id === null ? `kein ${type}` : type === 'Battery' ? `${name}kWh` : `${name}`}
+            <div className={(serial ? "small_serial" : "hidden")}>
+                {serial ?? serial}</div>
+            <div className={relay ? "relay" : "hidden"}>{relay === null ? '' : `Relais: ${relay}`}</div>
+        </button>
     );
 }

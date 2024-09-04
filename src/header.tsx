@@ -33,7 +33,7 @@ export function Header() {
             <Logo id="tq" className="img" onClick={(location.pathname === "/show_konfig" ? home : undefined)} />
             <Back id="back" onClick={(location.pathname === "/" || location.pathname === "/results" || location.pathname === "/show_konfig" ? undefined : back)}
                 className={"button_header right " + (location.pathname === "/" || location.pathname === "/results" || location.pathname === "/show_konfig" ? "home" : "")} />
-            <Settings id="gear" className={"button_header gear" + (location.pathname === "/" ? "" : " home")} onClick={(location.pathname === "/" ? () => setButtonPopup(true) : undefined)}>
+            <Settings id="gear" className={"button_header gear" + (location.pathname === "/" ? "" : " home") + (window.location.hostname === "localhost" ? " hide" : "")} onClick={(location.pathname === "/" ? () => setButtonPopup(true) : undefined)}>
             </Settings>
             <Popup trigger={buttonpopup} setTrigger={setButtonPopup}>
             </Popup>

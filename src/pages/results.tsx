@@ -8,13 +8,10 @@ export function Results() {
     const { results } = useMyWebsocket();
 
     return <>
-        {window.location.hostname === 'localhost' ? <div id='done'>DONE</div> :
-            <div className='window download'>
-                {/* <div className="file_selector"> */}
-                {/* <div className="browserheader">
-                    <div className='text'>Testergebnisse</div>
-                    <hr className='sep' style={{ position: 'relative', width: '90%' }} />
-                    </div> */}
+        {<div className='window download'>
+            {window.location.hostname === 'localhost' ? <div className='res_local'>
+                <div>
+                </div>Alle Konfigurationen getestet.<br /> <br />Testergebnisse stehen zur Einsicht<br />am Computer zur Verfügung</div> :
                 <div className='browser'>
                     <table className="table-fixed">
                         <thead className='browserheader'>
@@ -36,6 +33,6 @@ export function Results() {
                         </tbody>
                     </table>
                 </div>
-            </div>}
+            }</div>}
     </>
 }

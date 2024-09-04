@@ -1,13 +1,12 @@
 
 
-type PruefstandKomponente = { name: string | null, serial: string | null, relay: number }
-export type Metadata = { filename: string, created_at: number, emcy: boolean }
+type PruefstandKomponente = { name: string | null, serial: string | null, relay: number | null }
 
+export type Metadata = { filename: string, created_at: number, emcy: boolean }
 export type Comp_Konfig = ConfigBase<PruefstandKomponente[]>
 export type SingleConfig = ConfigBase<PruefstandKomponente>
 export type Combination = ConfigBase<number | null>
 export type TestResults = Result<Metadata>
-
 
 type ConfigBase<A> = {
     Motor: A
