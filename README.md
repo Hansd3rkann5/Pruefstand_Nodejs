@@ -1,30 +1,26 @@
-# React + TypeScript + Vite
+# Quellcode des Clients
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+In diesem Repository ist der gesamte Quellcode des Clients hinterlegt. Alle programmierten Dateien sind im Ordner "src" abgespeichert.
 
-Currently, two official plugins are available:
+## [components](https://github.com/Hansd3rkann5/Pruefstand_Nodejs/tree/main/src/componentes)
+Components im React Kontext sind, eigenständige Bausteine in einer React-Anwendung, die UI-Elemente definieren und verwalten, wie sie gerendert und mit Daten und Benutzerinteraktionen umgehen. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### ConfigCard
+Anzeige einer Konfiguration nach Start eines Tests
+### MultiSelectPopUp
+Anzeige der Variantenauswahl einer Komponentenkategorie
+### Popup
+Kein wiederholendes Element. Zeigt die Oberfläche für "download master"/"upload master" auf der Startseite der Anwendung an
+### ShowResult
+Repräsentiert eine Zeile der Ergebnisdarstellung. Dabei werden Datum und Uhrzeit eines Testergebnisses angezeigt
 
-## Expanding the ESLint configuration
+## [hooks](https://github.com/Hansd3rkann5/Pruefstand_Nodejs/tree/main/src/hooks)
+Hooks sind ein React spezifisches Feature. Diese ermöglichen es, State und andere React-Features in funktionalen Komponenten zu nutzen, ohne dass Klassenkomponenten erforderlich sind.
+### types und context
+Über die Dateien "deviceContext.ts", "deviceContextProvider.ts", "types.ts" und "useDeviceContext.ts" sind die Variablentypisierungen und weitere Typen definiert. Dieses Konstrukt beruht auf der Verwendung von _React_
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### websocket
+Hierin findet die Kommunikation mit dem Server statt. Nachrichten werden empfangen und gesendet.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## [pages](https://github.com/Hansd3rkann5/Pruefstand_Nodejs/tree/main/src/pages)
+In diesem Ordner sind alle Seiten abgespeichert, welche die einzelnen Oberfläche der Webanwendung repräsentieren.
