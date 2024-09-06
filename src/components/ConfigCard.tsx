@@ -13,9 +13,9 @@ function LinearProgressWithLabel(props: LinearProgressProps & { value: number })
 
 export const ConfigCards: React.FC<{ configs: Partial<SingleConfig>[] }> = ({ configs }) => {
 
-    const { konfigquantity, checkifconfig } = useMyWebsocket()
+    const { konfigquantity } = useMyWebsocket()
 
-    return (<div className="window konfig" style={{ justifyContent: (konfigquantity == 1 && !checkifconfig ? "center" : konfigquantity < 5 ? "center" : "") }}>
+    return (<div className="window konfig" style={{ justifyContent: (konfigquantity == 1 ? "center" : "") }}>
         {/* {configs.map((c, i) => <ConfigCard key={i} config={c} num={String(i + 1)} />)} */}
         {configs.map((c, i) => <ConfigCard key={i} config={c} num={i + 1} />)}
     </div>)
@@ -46,8 +46,8 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, num: number }
     return <>
         <div ref={mycardRef}
             className={"konfigframe" + (testnum == num ? " focus" : " nofocus") +
-                (konfigquantity == 1 && !checkifconfig ? " single" : "") +
-                (konfigquantity < 5 ? " focus3" : "") + (window.location.hostname === "localhost" ? "" : " pc") +
+                (konfigquantity == 1 ? " single" : "") +
+                (window.location.hostname === "localhost" ? "" : " pc") +
                 (num < testnum ? " completed" : "")}
             style={(num == 1 && testnum == 1 && konfigquantity > 4 ? { marginLeft: "7vw" } : {}) ||
                 (num == 1 ? { marginLeft: "1vw" } : {}) || (konfigquantity < 5 ? { marginRight: "1vw" } : {})}>
@@ -87,7 +87,6 @@ export const ConfigCard: React.FC<{ config: Partial<SingleConfig>, num: number }
                 <LinearProgressWithLabel className={(num < testnum ? "done" : "")} value={testnum == num ? progress : testnum <= num ? 0 : 100} />
             </div>
         </div>
-        {/* <div ref={mybuttonRef} className={(testcombinations.length == testnum || checkifauto || String(testnum) !== num ? "hidden hide" : konfigquantity < 5 ? "next4" : "next")}> */}
         <div ref={mybuttonRef} className={(testcombinations.length == testnum || checkifauto || testnum !== num ? "hidden hide" : konfigquantity < 5 ? "next4" : "next")}>
             <button onClick={(progress != 100 ? undefined : next_test)} className={"button manuell" + (progress != 100 ? " not_allow" : " allow")}>{(">")} </button>
         </div>

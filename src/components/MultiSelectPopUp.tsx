@@ -43,6 +43,7 @@ export function MultiSelectPopUp({ required = true, onClick: onClicking, type, n
         <div className={'selector-backdrop' + (!open ? ' hide' : '')} onClick={() => setOpen(!open)} />
         <button
             className={"selector_small color " + (open ? "" : "hover ") + (active !== undefined ? "checked" : "")}
+            id={(type === "Ladegerät/Service Dongle" ? "LadSeDo" : "")}
             onClick={() => { setOpen(!open) }}>
             {text}
             <div className={typeof active === 'number' && relays?.[active] === undefined ? "hide hidden" : "relay"}>{typeof active === 'number' ? `Relais: ${relays?.[active]}` : ""}</div>
@@ -82,7 +83,8 @@ const CustomButton: React.FC<ButtonProps> = ({
     return (
         <button
             onClick={click}
-            className={"selector_small manu hover " + (id === active ? "checked" : "")}>
+            className={"selector_small manu hover " + (id === active ? "checked" : "")}
+            id={(type === "Ladegerät/Service Dongle" ? "LadSeDo" : "")}>
             {id === null ? `kein ${type}` : type === 'Battery' ? `${name}kWh` : `${name}`}
             <div className={(serial ? "small_serial" : "hidden")}>
                 {serial ?? serial}</div>
@@ -90,3 +92,4 @@ const CustomButton: React.FC<ButtonProps> = ({
         </button>
     );
 }
+

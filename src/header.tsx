@@ -21,6 +21,7 @@ export function Header() {
         navigate("/")
     }, [sendMessage, navigate])
 
+
     const back = useCallback(() => {
         sendMessage(JSON.stringify({ type: "back" }))
         navigate(-1)
@@ -30,7 +31,7 @@ export function Header() {
         <header onClick={() => setPopup(false)}>{readyState !== ReadyState.OPEN && readyState !== ReadyState.CONNECTING && <div className="con_error">connecting to server...</div>}
             <House id="home" onClick={(location.pathname === "/" || location.pathname === "/show_konfig" ? undefined : home)}
                 className={"button_header left " + (location.pathname === "/" || location.pathname === "/show_konfig" ? "home" : "")} />
-            <Logo id="tq" className="img" onClick={(location.pathname === "/show_konfig" ? home : undefined)} />
+            <Logo id="tq" className="img" />
             <Back id="back" onClick={(location.pathname === "/" || location.pathname === "/results" || location.pathname === "/show_konfig" ? undefined : back)}
                 className={"button_header right " + (location.pathname === "/" || location.pathname === "/results" || location.pathname === "/show_konfig" ? "home" : "")} />
             <Settings id="gear" className={"button_header gear" + (location.pathname === "/" ? "" : " home") + (window.location.hostname === "localhost" ? " hide" : "")} onClick={(location.pathname === "/" ? () => setButtonPopup(true) : undefined)}>

@@ -36,7 +36,6 @@ export function Manu() {
 
     const set_combination = useCallback((id: number | null, type: string) => {
         const _combinations = [...combinations]
-        console.log(combinations)
         if (_combinations.length < konfigquantity) {
             _combinations[konfigquantity - 1] = {}
         }

@@ -53,6 +53,7 @@ export function useMyWebsocket() {
                 if (progress == 100) setRunning(false)
             }
             if ("done" in lastJM) {
+                setRunning(false)
                 navigate("/results")
                 reset()
             }
@@ -61,12 +62,12 @@ export function useMyWebsocket() {
             }
             if ("master" in lastJM) {
                 setMaster(lastJM["master"])
-                console.log(lastJM["running"])
                 if (lastJM["running"]) {
                     setTimeout(() => {
                         window.alert("Bitte Warten. Es läuft gerade ein Test. Bei Abschluss werden sie zu den Testergebnissen weitergeleitet.\nBitte schließen...")
                     }, 1000)
                 }
+                console.log(running)
                 navigate("/")
             }
             if ("Upload erfolgreich" in lastJM) {
@@ -110,8 +111,7 @@ export function useMyWebsocket() {
             if ("download" in lastJM) {
                 download_results(filename, lastJM["download"])
             }
-            if ("false upload" in lastJM) {
-                console.log(z)
+            if ("false upload" in lastJM && window.location.hostname !== 'localhost') {
                 if (z) {
                     window.alert("Hochgeladene Datei entspricht nicht den Anforderungen")
                     z = false
@@ -130,8 +130,8 @@ function map_relays(combinations: (number | null)[][], master: Comp_Konfig): Par
     return combinations.map(combination => {
         const conf: Partial<SingleConfig> = {
             Motor: master.Motor.find(c => c.relay === combination[0]),
-            Display: master.Display.find(c => c.relay === combination[1]),
-            Battery: master.Battery.find(c => c.relay === combination[2]),
+            Battery: master.Battery.find(c => c.relay === combination[1]),
+            Display: master.Display.find(c => c.relay === combination[2]),
             Smartbox: master.Smartbox.find(c => c.relay === combination[3]),
             "Range EXT": master["Range EXT"].find(c => c.relay === combination[4]),
             "Ladegerät/Service Dongle": master["Ladegerät/Service Dongle"].find(c => c.relay === combination[5]),
@@ -162,4 +162,3 @@ function download_results(filename: string, file: any) {
         }, 1000);
     }
 }
-
